@@ -27,8 +27,8 @@ import { Autoplay, Pagination } from "swiper";
 
 const Banner = () => {
   return (
-    <div className='w-full bg-white px-4 py-6 flex gap-4'>
-        <div className='w-2/3 xs:h-[320px] md:h-[510px] shadow-bannerShadow relative'>
+    <div className='xs:flex xs:flex-col lg:flex-row w-full bg-white px-4 py-6 flex gap-4'>
+        <div className='xs:w-full lg:w-2/3 xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px] shadow-bannerShadow relative'>
         <Swiper
             spaceBetween={30}
             centeredSlides={true}
@@ -45,14 +45,14 @@ const Banner = () => {
         >
             <SwiperSlide>
             <Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner} 
                 alt="sliderImageOne" 
                 priority
             />
             <BannerText
-            className="absolute w-60 h-full top-6 left-4 flex flex-col gap-3 text-white"
+            className="absolute w-60 h-full top-6 left-[10%] flex flex-col gap-3 text-white"
             title="Best pizza in town!"
             description="Order once and you won't be ordering pizza anywhere else."
             btnText="Order now"
@@ -60,14 +60,14 @@ const Banner = () => {
             </SwiperSlide>
             <SwiperSlide>
             <Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner1} 
                 alt="sliderImageOne" 
                 priority
             />
             <BannerText
-            className="absolute w-60 h-full top-6 right-[37%] flex flex-col gap-3 text-white"
+            className="absolute w-60 h-full top-6 right-[15%] flex flex-col gap-3 text-white"
             title="Order three pizzas pay for two"
             description="Every Monday from 2pm to 4pm ordering three pizzas you only pay for two."
             btnText="Order now"
@@ -75,7 +75,7 @@ const Banner = () => {
             </SwiperSlide>
             <SwiperSlide>
             <Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner2} 
                 alt="sliderImageOne" 
@@ -90,7 +90,7 @@ const Banner = () => {
             </SwiperSlide>
             <SwiperSlide>
             <Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner3} 
                 alt="sliderImageOne" 
@@ -105,7 +105,7 @@ const Banner = () => {
             </SwiperSlide>
             <SwiperSlide>
                 <Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner4} 
                 alt="sliderImageOne" 
@@ -119,7 +119,7 @@ const Banner = () => {
            /></SwiperSlide>
             <SwiperSlide>
                 <Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner5} 
                 alt="sliderImageOne" 
@@ -132,20 +132,20 @@ const Banner = () => {
             btnText="Order now"
            /></SwiperSlide>
             <SwiperSlide><Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                 relative object-cover'
                 src={banner6} 
                 alt="sliderImageOne" 
                 priority
             />
             <BannerText
-            className="absolute w-60 h-full top-6 left-[37%] flex flex-col gap-3 text-gray-900"
+            className="absolute w-60 h-full top-6 left-[17%] flex flex-col gap-3 text-white"
             title="Vegetable Boom!"
             description="Vegetarian pizza for connoisseurs of fresh and healthy products."
             btnText="Order now"
            /></SwiperSlide>
             <SwiperSlide><Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner7} 
                 alt="sliderImageOne" 
@@ -158,7 +158,7 @@ const Banner = () => {
             btnText="Order now"
            /></SwiperSlide>
             <SwiperSlide><Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner8} 
                 alt="sliderImageOne" 
@@ -173,7 +173,7 @@ const Banner = () => {
            </SwiperSlide>
            <SwiperSlide>
             <Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner9} 
                 alt="sliderImageOne" 
@@ -188,7 +188,7 @@ const Banner = () => {
             </SwiperSlide>
             <SwiperSlide>
             <Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner10} 
                 alt="sliderImageOne" 
@@ -203,7 +203,7 @@ const Banner = () => {
             </SwiperSlide>
             <SwiperSlide>
             <Image
-                className='w-full xs:h-[320px] md:h-[510px] 
+                className='w-full xs:h-[320px] md:h-[510px] lg:h-[410px] xl:h-[510px]
                  relative object-cover'
                 src={banner11} 
                 alt="sliderImageOne" 
@@ -218,19 +218,17 @@ const Banner = () => {
             </SwiperSlide>
       </Swiper>
         </div>
-        <div className='w-1/3 border-[1px] border-[#E2E8E8]
+        <div className='xs:w-full xs:h-[320px] sm:h-[510px] lg:h-[410px] xl:h-[510px] lg:w-1/3 border-[1px] border-[#E2E8E8]
         shadow-bannerShadow p-4 flex flex-col justify-between'>
             <div className='relative w-full flex items-center justify-between'>
-                <h2 className='text-xl font-semibold text-black'>
+                <h2 className='xs:text-sm md:text-xl font-semibold text-black'>
                     Visit our restaurants
                 </h2>
-                <Link className='text-base text-[#8D8586] underline underline-offset-2' href="/">
+                <Link className='xs:text-sm md:text-base text-[#8D8586] underline underline-offset-2' href="/">
                     To restorants
                 </Link>
             </div>
-            <Image className='h-full object-cover' src={restorant1} alt="restorant"/>
-            
-            
+            <Image className='h-80 object-fit xl:object-cover xl:h-full' src={restorant1} alt="restorant"/>
         </div>
     </div>
   )
