@@ -16,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-          <div>
+          <div className='max-w-container mx-auto'>
             <Banner/>
             <PizzaList/>
           </div>
