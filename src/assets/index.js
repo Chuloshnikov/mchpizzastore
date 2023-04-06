@@ -12,6 +12,7 @@ import banner10 from './images/slider/banner10.webp';
 import banner11 from './images/slider/banner11.webp';
 import restorant1 from './images/restorant1.webp';
 import pizza1 from './images/pizza1.webp';
+import eatpizza from './images/eatpizza.webp';
 
 
 export {
@@ -28,5 +29,6 @@ export {
     banner10,
     banner11,
     restorant1,
-    pizza1
+    pizza1,
+    eatpizza
 };
