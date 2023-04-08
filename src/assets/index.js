@@ -13,6 +13,7 @@ import banner11 from './images/slider/banner11.webp';
 import restorant1 from './images/restorant1.webp';
 import pizza1 from './images/pizza1.webp';
 import eatpizza from './images/eatpizza.webp';
+import sizes from './icons/size.png';
 
 
 export {
@@ -30,5 +31,6 @@ export {
     banner11,
     restorant1,
     pizza1,
-    eatpizza
+    eatpizza,
+    sizes
 };
