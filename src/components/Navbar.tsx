@@ -69,7 +69,7 @@ const Navbar = () => {
                 </ul>
             </nav>
           </div>
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-2 min-w-[150px]'>
             <div className='mt-4'>
               <Link  href="/cart" passHref>
                   <MdOutlineShoppingBasket className='text-yellow-950 w-10 h-10'/>
