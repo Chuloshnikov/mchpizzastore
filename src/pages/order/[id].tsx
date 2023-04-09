@@ -27,6 +27,8 @@ function createData(
 
 const Order = () => {
 
+    const status = 0;
+
     const statusClass = (index) => {
         if (index - status < 1) return styles.done;
         if (index - status === 1) return styles.inProgress;
@@ -35,7 +37,7 @@ const Order = () => {
 
   return (
     <div className='w-full bg-white text-gray-800 px-4'>
-        <div className='max-w-contentContainer mx-auto flex items-center py-4 xs:flex-col lg:flex-row'>
+        <div className='max-w-contentContainer mx-auto flex gap-10 items-center py-4 xs:flex-col lg:flex-row'>
             <div className='w-2/3 h-full xs:w-full flex flex-col items-center justify-center overflow-hidden relative'>
                 <div className='mb-[30px] w-full'>
                     <TableContainer component={Paper}>
@@ -68,38 +70,38 @@ const Order = () => {
                 </div>
                 <div className={styles.statusItems}>
                     <div className={styles.status}>
-                        <div className={styles.statusItem}>
+                        <div className={statusClass(0)}>
                             <Image src={paid} width={50} height={50} alt="paid"/>
                             <span>Payment</span>
                             <div className={styles.checkedIcon}>
-                                <Image src={checked} width={30} height={30} alt="checked"/>
+                                <Image className={styles.checkedIcon} src={checked} width={30} height={30} alt="checked"/>
                             </div>   
                         </div>
                     </div>
                     <div className={styles.status}>
-                        <div className={styles.statusItem}>
+                        <div className={statusClass(0)}>
                             <Image src={bake} width={50} height={50} alt="bake"/>
                             <span>Preparing</span>
                             <div className={styles.checkedIcon}>
-                                <Image src={checked} width={30} height={30} alt="checked"/>
+                                <Image className={styles.checkedIcon} src={checked} width={30} height={30} alt="checked"/>
                             </div>   
                         </div>
                     </div>
                     <div className={styles.status}>
-                        <div className={styles.statusItem}>
+                        <div className={statusClass(1)}>
                             <Image src={bike} width={50} height={50} alt="bike"/>
                             <span>On the way</span>
                             <div className={styles.checkedIcon}>
-                                <Image src={checked} width={30} height={30} alt="checked"/>
+                                <Image className={styles.checkedIcon} src={checked} width={30} height={30} alt="checked"/>
                             </div>   
                         </div>
                     </div>
                     <div className={styles.status}>
-                        <div className={styles.statusItem}>
+                        <div className={statusClass(2)}>
                             <Image src={delivered} width={50} height={50} alt="delivered"/>
                             <span>Delivered</span>
                             <div className={styles.checkedIcon}>
-                                <Image src={checked} width={30} height={30} alt="checked"/>
+                                <Image className={styles.checkedIcon} src={checked} width={30} height={30} alt="checked"/>
                             </div>   
                         </div>
                     </div>

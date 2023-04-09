@@ -8,9 +8,38 @@
     
 }
 
-.statusItem {
+.done {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2px;
+}
+
+.inProgress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    animation: inProgress 1s ease infinite alternate;
+}
+
+@keyframes inProgress {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.undone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    opacity: 0.3;
+}
+
+.undone .checkedIcon, .inProgress .checkedIcon {
+    display: none;
 }
