@@ -14,6 +14,11 @@ import restorant1 from './images/restorant1.webp';
 import pizza1 from './images/pizza1.webp';
 import eatpizza from './images/eatpizza.webp';
 import sizes from './icons/size.png';
+import paid from './icons/paid.png';
+import bake from './icons/bake.png';
+import bike from './icons/bike.png';
+import delivered from './icons/delivered.png';
+import checked from './icons/checked.png';
 
 
 export {
@@ -32,5 +37,10 @@ export {
     restorant1,
     pizza1,
     eatpizza,
-    sizes
+    sizes,
+    paid,
+    checked,
+    bake,
+    bike,
+    delivered
 };

@@ -63,7 +63,7 @@ const CartPage = () => {
                 </TableContainer>
             </div>
             <div className='w-1/3 h-full xs:w-full py-4'>
-                <div className='flex flex-col gap-2 py-12 px-12 text-white bg-black opacity-70'>
+                <div className='flex flex-col gap-2 py-16 px-12 text-white bg-black opacity-70'>
                         <h3 className='text-xl font-bold'>CART TOTAL</h3>
                         <div className='py-3 text-lg font-semibold'>
                             <div className='flex gap-1'>
@@ -76,7 +76,7 @@ const CartPage = () => {
                                 <p>Total:</p><span>$22</span>
                             </div>
                         </div>
-                        <button className='p-2.5 bg-white text-red-600 text-lg font-semibold'>CHECKOUT NOW!</button>
+                        <button className='p-2.5 bg-white text-red-600 text-lg font-semibold hover:scale-105 duration-300'>CHECKOUT NOW!</button>
                 </div>
             </div>
         </div>
