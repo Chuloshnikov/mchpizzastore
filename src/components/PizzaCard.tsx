@@ -5,7 +5,7 @@ import Link from 'next/link';
 const PizzaCard = ({item}: any) => {
   return (
     <>
-    <Link href="/" className='px-2 py-2 shadow-bannerShadow text-yellow-950 hover:bg-yellow-400 duration-300'>
+    <Link href={`/product/${item._id}`} passHref className='px-2 py-2 shadow-bannerShadow text-yellow-950 hover:bg-yellow-400 duration-300'>
         <div className="w-full overflow-hidden p-1">
             <Image src={item.img} 
             className="object-contain"

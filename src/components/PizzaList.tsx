@@ -15,7 +15,7 @@ const PizzaList = ({ productData }: any) => {
           </p>
       </div>
       <div className='className="py-6 px-4 grid xs:grid-cols-1 md:grid-cols-2 mdl:grid-cols-2 lgl:grid-cols-4 gap-4 mt-6'>
-        {productData.map((item: item) => (
+        {productData.map((item: Item) => (
           <PizzaCard key={item._id} item={item}/>
         )
         
