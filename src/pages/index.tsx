@@ -4,6 +4,9 @@ import Banner from '../components/Banner';
 import PizzaList from '@/components/PizzaList';
 import { Product } from '../../type';
 
+import axios from 'axios';
+import { GetStaticPaths } from 'next';
+
 
 interface Props {
   productData: Product
@@ -32,11 +35,12 @@ export default function Home({ productData }: Props) {
 
 //------------------------------ DATA FETCHING--------------------------------------//
 
-export const getServerSideProps = async () => {
-  const productData = await (
-      await fetch("http://localhost:3000/api/productdata")
-      ).json();
-      return {
-        props: { productData },
-      }
-    };
+export const getStaticProps: GetStaticPaths<Product> = async () => {
+  const res = await axios.get("http://localhost:3000/api/productdata");
+  return {
+    props: {
+      productData: res.data,
+      revalidate: 60,
+    }
+  }
+}
