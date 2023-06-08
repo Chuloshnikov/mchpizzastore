@@ -1,52 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState,  useEffect } from 'react';
 import { useRouter } from "next/router";
 import Image from 'next/image';
-import { pizza1, sizes } from "../../assets/index";
-import axios from 'axios';
-import { optionGroupUnstyledClasses } from '@mui/base';
+import { sizes } from "../../assets/index";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../redux/cartSlice';
 
 
-const ProductDetails = ({pizza}) => {
-    const [price, setPrice] = useState(pizza.prices[0]);
+
+const ProductDetails = () => {
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const [product, setProduct] = useState<any>({});
+    const [isLoading, setLoading] = useState(false);
+    console.log(router);
+
+    const [price, setPrice] = useState<Number>(0);
     const [size, setSize] = useState(0);
     const [extras, setExtras] = useState([]);
     const [quantity, setQuantiny] = useState(1);
 
+    useEffect(() => {
+        setLoading(true);
+        setProduct(router.query);
+        setPrice(router.query.prices[0]);
+        setLoading(false);
+    },[]);
 
-    const changePrice = (number) => {
-        setPrice(price + number);
-    }
 
-    const handleSize = (sizeIndex) => {
-        const difference = pizza.prices[sizeIndex] - pizza.prices[size];
-        setSize(sizeIndex);
-        changePrice(difference);
-    }
-
-    const handleChange = (e, option) => {
-        const checked = e.target.checked;
-
-        if (checked) {
-            changePrice(option.price);
-            setExtras(prev => [...prev, option]);
-        } else {
-            changePrice(-option.price);
-            setExtras(extras.filter(extra => extra._id !== option._id));
-        }
-    }
-
-    console.log(extras)
 
   return (
     <div className='w-full bg-white text-gray-800 px-4'>
         <div className='max-w-contentContainer mx-auto flex items-center py-4 xs:flex-col lg:flex-row'>
             <div className='w-2/3 h-full xs:w-full flex items-center justify-center overflow-hidden relative'>
-                <Image src={pizza.img} width={700} height={500}/>
+                <Image src={product.img} width={700} height={500}/>
             </div>
             <div className='w-1/3 h-full xs:w-full flex flex-col justify-start gap-2 p-4'>
-                <h3 className='font-bold text-2xl'>{pizza.title}</h3>
+                <h3 className='font-bold text-2xl'>{product.title}</h3>
                 <span className='text-red-400 font-semibold text-xl'>${price}</span>
-                <p className='font-medium text-base'>{pizza.description}</p>
+                <p className='font-medium text-base'>{product.description}</p>
                 <h4 className='font-bold text-lg'>Choose the size</h4>
                 <div className='flex gap-10'>
                     <div className='cursor-pointer' onClick={() => handleSize(0)}>
@@ -76,7 +67,8 @@ const ProductDetails = ({pizza}) => {
                 </div>
                 <h3 className='font-bold text-lg'>Choose additional ingredients</h3>
                 <div className='flex items-center gap-2'>
-                    {pizza.extraOptions.map((option, index) => ( 
+                    {/*
+                    {product.extraOptions.map((option, index) => ( 
                         <div key={index} className='flex items-center gap-1'>
                         <input 
                             className='w-3 h-3 w-4 h-4 w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded
@@ -85,13 +77,12 @@ const ProductDetails = ({pizza}) => {
                             type="checkbox" 
                             id={option.text} 
                             name={option.text}
-                            onChange={(e) => handleChange(e, option)}
                         />
                     <label htmlFor='double' className='text-base font-medium'>{option.text}</label>
                         </div>
                     ))}
                     
-                    
+                    */}
                 </div>
                 <h3 className='font-bold text-lg'>Add to cart</h3>
                 <div className='flex gap-2'>
@@ -105,6 +96,7 @@ const ProductDetails = ({pizza}) => {
                       type="number" />
                     <button className='bg-red-600 text-sm p-2.5 text-white font-semibold
                      hover:bg-red-800 duration-300'
+                     
                      >
                         Add to Cart
                      </button>
@@ -116,17 +108,6 @@ const ProductDetails = ({pizza}) => {
 }
 
 
-export const getServerSideProps = async ({params}) => {
-  
-  
-    const res = await axios.get(`http://localhost:3000/api/productdata/${params.id}`);
-    return {
-      props: {
-        pizza: res.data,
-        revalidate: 60,
-      }
-    }
-  }
 
 export default ProductDetails;
 

@@ -3,9 +3,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const PizzaCard = ({item}: any) => {
-  return (
+  console.log(item.extraOptions)
+   return (
     <>
-    <Link href={`/product/${item._id}`} passHref className='px-2 py-2 shadow-bannerShadow text-yellow-950 hover:bg-yellow-400 duration-300'>
+    <Link href={{
+      pathname:`product/${item._id}`,
+      query: {
+        _id: item._id,
+        title: item.title,
+        description: item.description,
+        img: item.img,
+        prices: item.prices,
+        extraOptions: item.extraOptions,
+      }
+    }} 
+        as={`product/${item._id}`}
+        className='px-2 py-2 shadow-bannerShadow text-yellow-950 hover:bg-yellow-400 duration-300'
+        >
         <div className="w-full overflow-hidden p-1">
             <Image src={item.img} 
             className="object-contain"
