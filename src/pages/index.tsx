@@ -6,7 +6,7 @@ import { Product } from '../../type';
 
 
 import axios from 'axios';
-import { GetStaticPaths } from 'next';
+
 
 
 

@@ -7,11 +7,12 @@ import Image from 'next/image';
 import logo from '../assets/icons/logo.gif';
 import Link from 'next/link';
 
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
 
   const [openMenu, setOpenMenu] = useState(false);
-
+  const quantity = useSelector(state => state.cart.quantity);
 
   return (
     <div className='w-full bg-yellow-400 text-yellow-950 px-4 py-4 sticky top-0 z-50'>
@@ -77,7 +78,7 @@ const Navbar = () => {
                     text-white text-xs rounded-full
                     flex flex-col justify-center items-center z-10'
                     >
-                      0
+                      {quantity}
                   </span>
               </Link>
             </div>
