@@ -1,6 +1,11 @@
 import React from 'react';
 import { Item } from "../../type";
 import PizzaCard from './PizzaCard';
+import { Product } from '../../type';
+
+interface Props {
+  productData: Product
+}
 
 const PizzaList = ({ productData }: any) => {
   
