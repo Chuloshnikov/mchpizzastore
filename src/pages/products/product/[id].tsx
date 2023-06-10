@@ -1,9 +1,11 @@
 import React, { useState,  useEffect } from 'react';
 import { useRouter } from "next/router";
 import Image from 'next/image';
-import { sizes } from "../../assets/index";
+import { sizes } from "../../../assets/index";
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../redux/cartSlice';
+import { addToCart } from '../../../../redux/cartSlice';
+import axios from 'axios';
+
 
 
 
@@ -12,19 +14,30 @@ const ProductDetails = () => {
     const dispatch = useDispatch();
     const [product, setProduct] = useState<any>({});
     const [isLoading, setLoading] = useState(false);
-    console.log(router);
-
+    const {id} = router.query;
+    
+    // product manipulation
     const [price, setPrice] = useState<Number>(0);
     const [size, setSize] = useState(0);
     const [extras, setExtras] = useState([]);
-    const [quantity, setQuantiny] = useState(1);
+    //const [quantity, setQuantiny] = useState(1);
 
     useEffect(() => {
+        if (!id) {
+          return;
+        }
         setLoading(true);
-        setProduct(router.query);
-        setPrice(router.query.prices[0]);
+        axios.get(`/api/productdata?id=${id}`).then(response => {
+          setProduct(response.data);
+          console.log(response.data);
+          setPrice(response.data.prices[0]);
+          setExtras(response.data.extras);
+          
+        })
         setLoading(false);
-    },[]);
+      },[id]);
+    
+      const _id = product._id;
 
 
 
