@@ -3,8 +3,8 @@ import { useSession, signIn } from "next-auth/react";
 import AdminLayout from '@/components/AdminLayout';
 
 const Admin = () => {
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUserName] = useState<String>();
+  const [password, setPassword] = useState<String>();
   
   const {data: session } = useSession();
   console.log(session);
@@ -17,7 +17,7 @@ const Admin = () => {
     
   if (!session) {
     return (
-      <div className=' w-screen flex h-[500px] items-center'>
+      <div className='flex h-[500px] items-center'>
       <div className='flex flex-col items-center text-center w-full'>
           <div className='border p-5 shadow-containerShadow'>
               <h2 className='text-yellow-950 text-bold text-2xl mb-2'>Admin Panel</h2>
@@ -53,9 +53,9 @@ const Admin = () => {
   }
 
   return (
-    <div className='bg-white min-h-screen flex'>
+    <div className='bg-white flex max-w-contentContainer mx-auto'>
         <AdminLayout>
-            
+            dashboard
         </AdminLayout>
     </div>
   )
