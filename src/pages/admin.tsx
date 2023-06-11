@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
+import AdminLayout from '@/components/AdminLayout';
 
 const Admin = () => {
   const [username, setUserName] = useState();
@@ -53,12 +54,9 @@ const Admin = () => {
 
   return (
     <div className='bg-white min-h-screen flex'>
-        
-        <button 
-            onClick={() => signOut()}
-            >
-              Sign out
-        </button>
+        <AdminLayout>
+            
+        </AdminLayout>
     </div>
   )
 }
