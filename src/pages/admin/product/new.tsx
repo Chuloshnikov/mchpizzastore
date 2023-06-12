@@ -1,9 +1,12 @@
 import React from 'react';
 import AdminLayout from '@/components/AdminLayout'
 import ProductForm from '@/components/ProductForm';
+import { getSession, useSession } from 'next-auth/react';
 
 
 export default function NewProduct() {
+  const { data: session } = useSession();
+
   return (
     <AdminLayout>
         <div className='max-w-contentContainer'>
@@ -14,4 +17,22 @@ export default function NewProduct() {
         </div>
     </AdminLayout>
   )
+}
+
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if(!session) {
+    return {
+      redirect: {
+        destination: '/admin',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: { session }
+  } 
 }
