@@ -10,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { BsFillTrashFill, BsPencilSquare } from "react-icons/bs";
 
 const AdminProductsList = () => {
     const [products, setProducts] = useState();
@@ -62,8 +63,24 @@ const AdminProductsList = () => {
                                 <TableCell align="right">
                                     <Image src={product?.img} alt="productImg" width={40} height={40}/>
                                 </TableCell>
-                                <TableCell align="right"></TableCell>
-                                <TableCell align="right"></TableCell>
+                                <TableCell align="right">
+                                    <Link 
+                                    className='bg-yellow-400 text-white p-1 px-1 text-base font-semibold
+                                    hover:bg-yellow-500 duration-300 flex items-center justify-center'
+                                    href={`/admin/product/delete/${product._id}`}>
+                                        <BsFillTrashFill/>
+                                        <span>Delete</span>
+                                    </Link>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Link 
+                                    className='bg-yellow-400 text-white p-1 px-1 text-base font-semibold
+                                    hover:bg-yellow-500 duration-300 flex items-center justify-center'
+                                    href={`/admin/products/edit/${product._id}`}>
+                                        <BsPencilSquare/>
+                                        <span>Edit</span>
+                                    </Link>
+                                </TableCell>
                             </TableRow>
                             ))}
                         </TableBody>
