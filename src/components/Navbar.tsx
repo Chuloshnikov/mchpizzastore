@@ -49,7 +49,7 @@ const Navbar = () => {
                     </li>
                  <li>
                   <Link href="/">
-                    <Image src={logo} className="border-white border-[3px]" width={80} height={80}/>
+                    <Image src={logo} className="border-white border-[3px]" width={80} height={80} alt="logo"/>
                   </Link>
                   </li> 
                   <li className='hover:text-white hover:scale-105 focus:text-white focusLscale-105 duration-300'>

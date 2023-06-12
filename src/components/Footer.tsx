@@ -10,7 +10,7 @@ const Footer = () => {
     <div className='w-full xs:h-[150px]  md:h-[220px] bg-red-600 text-white'>
       <div className=' max-w-container mx-auto pt-6 pb-8 flex text-center items-center justify-between'>
         <div className='xs:hidden md:block width-[200p] height-[120px] ml-4'>
-          <Image src={eatpizza} width={220} height={120} className="object-contain"/>
+          <Image src={eatpizza} width={220} height={120} className="object-contain" alt="eat pizza"/>
         </div>
         <div className='xs:mx-auto flex flex-col items-center gap-3 max-w-[300px] -mb-12'>
           <p>More pizza more happiness. don't worry about being overweight, you deserve it.</p>

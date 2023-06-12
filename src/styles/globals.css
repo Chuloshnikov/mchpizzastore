@@ -6,3 +6,13 @@
 .swiper-pagination-bullet-active {
     background-color: #FACC15 !important;
   }
+
+input, textarea, select {
+  @apply border px-2;
+  @apply mb-2 resize-none;
+}
+
+
+label {
+  @apply font-semibold text-yellow-950;
+}
