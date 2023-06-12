@@ -76,7 +76,7 @@ const AdminProductsList = () => {
                                     <Link 
                                     className='bg-yellow-400 text-white p-1 px-1 text-base font-semibold
                                     hover:bg-yellow-500 duration-300 flex items-center justify-center'
-                                    href={`/admin/products/edit/${product._id}`}>
+                                    href={`/admin/product/edit/${product._id}`}>
                                         <BsPencilSquare/>
                                         <span>Edit</span>
                                     </Link>
