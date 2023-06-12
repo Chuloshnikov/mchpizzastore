@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { getSession, useSession } from 'next-auth/react';
 
 
 const DeleteProductPage = () => {
     const router = useRouter();
     const [productInfo, setProductInfo] = useState();
+    const { data: session } = useSession();
 
     const {id} = router.query;
     
@@ -54,5 +56,22 @@ const DeleteProductPage = () => {
     </AdminLayout>
   )
 }
+
+export async function getServerSideProps({ req }) {
+    const session = await getSession({ req });
+  
+    if(!session) {
+      return {
+        redirect: {
+          destination: '/admin',
+          permanent: false
+        }
+      }
+    }
+  
+    return {
+      props: { session }
+    } 
+  }
 
 export default DeleteProductPage;

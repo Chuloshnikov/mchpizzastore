@@ -1,6 +1,10 @@
 import AdminProductsList from "../../components/AdminProductsList";
+import { getSession, useSession } from 'next-auth/react';
+
 
 const Products = () => {
+    const { data: session } = useSession();
+
     return (
         <div>
             <AdminProductsList/>
@@ -8,5 +12,22 @@ const Products = () => {
         
     )
 }
+
+export async function getServerSideProps({ req }) {
+    const session = await getSession({ req });
+  
+    if(!session) {
+      return {
+        redirect: {
+          destination: '/admin',
+          permanent: false
+        }
+      }
+    }
+  
+    return {
+      props: { session }
+    } 
+  }
 
 export default Products;
