@@ -23,7 +23,7 @@ const AdminProductsList = () => {
 
   return (
     <AdminLayout>
-        <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-3 mb-12'>
             <div className='flex items-center justify-center'>
                 <div className='flex flex-col items-center gap-3 max-w-[400px]'>
                     <h2 className='text-yellow-950 text-xl font-semibold'>Products management</h2>
