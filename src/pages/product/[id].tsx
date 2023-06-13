@@ -2,8 +2,8 @@ import React, { useState,  useEffect } from 'react';
 import { useRouter } from "next/router";
 import Image from 'next/image';
 import { sizes } from "../../assets/index";
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../redux/cartSlice';
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../../redux/cartSlice";
 import axios from 'axios';
 
 
@@ -57,6 +57,10 @@ const ProductDetails = () => {
           changePrice(-option.price);
           setExtras(extras.filter((extra) => extra._id !== option._id));
         }
+      };
+
+      const handleClick = () => {
+        dispatch(addProduct({...product, extras, price, quantity}));
       };
 
 
@@ -129,7 +133,7 @@ const ProductDetails = () => {
                       type="number" />
                     <button className='bg-red-600 text-sm p-2.5 text-white font-semibold
                      hover:bg-red-800 duration-300 mb-2'
-                     
+                     onClick={handleClick}
                      >
                         Add to Cart
                      </button>

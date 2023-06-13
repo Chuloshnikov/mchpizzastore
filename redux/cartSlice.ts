@@ -1,35 +1,25 @@
-import { UserInfo } from './../type.d';
-import { StoreProduct } from './../type.d';
 import { createSlice } from "@reduxjs/toolkit";
 
-interface CartState{
-    productData: StoreProduct[],
-    userInfo: null | UserInfo
-}
-
-const initialState: CartStore = {
-    productData:[],
-    userInfo: null,
-};
-
-
-export const cartSlice = createSlice({
-    name: "shopper",
-    initialState,
-    reducers: {
-        addToCart: (state, action) => {
-            const item = state.productData.find((item:StoreProduct) => item._id === action.payload._id);
-
-            if (item) {
-                item.quantity += action.payload.quantity
-            } else {
-                state.productData.push(action.payload);
-            }
-
-            
-        },
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: {
+    products: [],
+    quantity: 0,
+    total: 0,
+  },
+  reducers: {
+    addProduct: (state, action) => {
+      state.products.push(action.payload);
+      state.quantity += 1;
+      state.total += action.payload.price * action.payload.quantity;
     },
+    reset: (state) => {
+      state.products = [];
+      state.quantity = 0;
+      state.total = 0;
+    },
+  },
 });
 
-export const {addToCart} = cartSlice.actions;
+export const { addProduct, reset } = cartSlice.actions;
 export default cartSlice.reducer;

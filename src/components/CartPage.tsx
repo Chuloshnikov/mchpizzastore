@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,12 +8,101 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import Image from "next/image";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { reset } from "../../redux/cartSlice";
+import {
+    PayPalScriptProvider,
+    PayPalButtons,
+    usePayPalScriptReducer,
+  } from "@paypal/react-paypal-js";
 
 
 
 const CartPage = () => {
-
+    const cart = useSelector((state) => state.cart);
+    const [open, setOpen] = useState(false);
+    const [cash, setCash] = useState(false);
+    const amount = cart.total;
+    const currency = "USD";
+    const style = { layout: "vertical" };
+    const dispatch = useDispatch();
+    const router = useRouter();
     
+    
+
+      
+      
+      const createOrder = async (data) => {
+        try {
+          const res = await axios.post("http://localhost:3000/api/orders", data);
+          if (res.status === 201) {
+            dispatch(reset());
+            router.push(`/orders/${res.data._id}`);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+        // Custom component to wrap the PayPalButtons and handle currency changes
+  const ButtonWrapper = ({ currency, showSpinner }) => {
+    // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
+    // This is the main reason to wrap the PayPalButtons in a new component
+    const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+
+    useEffect(() => {
+      dispatch({
+        type: "resetOptions",
+        value: {
+          ...options,
+          currency: currency,
+        },
+      });
+    }, [currency, showSpinner]);
+
+    return (
+      <>
+        {showSpinner && isPending && <div className="spinner" />}
+        <PayPalButtons
+          style={style}
+          disabled={false}
+          forceReRender={[amount, currency, style]}
+          fundingSource={undefined}
+          createOrder={(data, actions) => {
+            return actions.order
+              .create({
+                purchase_units: [
+                  {
+                    amount: {
+                      currency_code: currency,
+                      value: amount,
+                    },
+                  },
+                ],
+              })
+              .then((orderId) => {
+                // Your code here after create the order
+                return orderId;
+              });
+          }}
+          onApprove={function (data, actions) {
+            return actions.order.capture().then(function (details) {
+              const shipping = details.purchase_units[0].shipping;
+              createOrder({
+                customer: shipping.name.full_name,
+                address: shipping.address.address_line_1,
+                total: cart.total,
+                method: 1,
+              });
+            });
+          }}
+        />
+      </>
+    );
+  };
+    
+
 
   return (
     <>
@@ -38,13 +127,13 @@ const CartPage = () => {
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                     <TableCell component="th" scope="row">
-                                        <Image src={product.img} alt="product" width={100} height={50}/>
+                                        <Image src={product.img} alt="product" width={100} height={50} alt="product"/>
                                     </TableCell>
                                     <TableCell align="right">{product.title}</TableCell>
                                     <TableCell align="right">{product.extraOptions.map(extra => <span key={extra._id}>{extra.text}</span>)}</TableCell>
                                     <TableCell align="right">${product.price}</TableCell>
                                     <TableCell align="right">{product.quantity}</TableCell>
-                                    <TableCell align="right">${product.total}</TableCell>
+                                    <TableCell align="right">${product.price * product.quantity}</TableCell>
                                 </TableRow>
                                 ))}
                         </TableBody>
@@ -56,16 +145,46 @@ const CartPage = () => {
                         <h3 className='text-xl font-bold'>CART TOTAL</h3>
                         <div className='py-3 text-lg font-semibold'>
                             <div className='flex gap-1'>
-                                <p>Subtotal:</p><span>$22</span>
+                                <p>Subtotal:</p><span>${cart.total}</span>
                             </div>
                             <div className='flex gap-1'>
-                                <p>Discount:</p><span>$22</span>
+                                <p>Discount:</p><span>$0.00</span>
                             </div>
                             <div className='flex gap-1'>
-                                <p>Total:</p><span>$22</span>
+                                <p>Total:</p><span>${cart.total}</span>
                             </div>
                         </div>
-                        <button className='p-2.5 bg-white text-red-600 text-lg font-semibold hover:scale-105 duration-300'>CHECKOUT NOW!</button>
+                        <div className="w-full">
+                        {open ? (
+                                <div>
+                                    <button
+                                    className='p-2.5 bg-white text-red-600 text-lg font-semibold 
+                                    hover:scale-105 duration-300'   
+                                    onClick={() => setCash(true)}
+                                    >
+                                    CASH ON DELIVERY
+                                    </button>
+                                    <PayPalScriptProvider
+                                        options={{
+                                            "client-id":
+                                                "ATTL8fDJKfGzXNH4VVuDy1qW4_Jm8S0sqmnUTeYtWpqxUJLnXIn90V8YIGDg-SNPaB70Hg4mko_fde4-",
+                                                components: "buttons",
+                                                currency: "USD",
+                                                "disable-funding": "credit,card,p24",
+                                            }}
+                                            >
+                                            <ButtonWrapper currency={currency} showSpinner={false} />
+                                            </PayPalScriptProvider>
+                                </div>
+                                ) : (
+                                <button 
+                                onClick={() => setOpen(true)}
+                                className='p-2.5 bg-white text-red-600 text-lg font-semibold 
+                                hover:scale-105 duration-300'
+                                >
+                                    CHECKOUT NOW!
+                                </button>)}
+                        </div>
                 </div>
             </div>
         </div>
