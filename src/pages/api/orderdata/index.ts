@@ -39,4 +39,11 @@ type Data = {
     if (method === 'PUT') {
 
     }
+
+    if (method === 'DELETE') {
+      if (req.query?.id) {
+        await Order.deleteOne({ _id: req.query?.id });
+        res.json(true);
+      }
+    }
   }
