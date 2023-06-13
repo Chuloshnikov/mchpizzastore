@@ -73,7 +73,7 @@ const ProductDetails = () => {
             </div>
             <div className='w-1/3 h-full xs:w-full flex flex-col justify-start gap-2 p-4'>
                 <h3 className='font-bold text-2xl'>{product.title}</h3>
-                <span className='text-red-400 font-semibold text-xl'>${price}</span>
+                <span className='text-red-400 font-semibold text-xl'>${parseFloat(price).toFixed(2)}</span>
                 <p className='font-medium text-base'>{product.description}</p>
                 <h4 className='font-bold text-lg'>Choose the size</h4>
                 <div className='flex gap-10'>

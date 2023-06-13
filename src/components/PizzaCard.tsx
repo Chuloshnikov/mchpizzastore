@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const PizzaCard = ({item}: any) => {
-  console.log(item.extraOptions)
    return (
     <>
     <Link href={`/product/${item._id}`}
@@ -18,7 +17,7 @@ const PizzaCard = ({item}: any) => {
         </div>
         <div className="px-2 py-4 flex flex-col justify-center">
             <h3 className='text-xl font-semibold'>Pizza {item.title}</h3>
-            <span className='text-red-500 text-lg font-semibold'>${item.prices[0]}</span>
+            <span className='text-red-500 text-lg font-semibold'>${parseFloat(item.prices[0]).toFixed(2)}</span>
         </div>
         <p className='text-sm font-semibold'>
           {item.description.substring(0, 80)}...

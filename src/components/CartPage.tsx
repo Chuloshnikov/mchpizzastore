@@ -35,7 +35,7 @@ const CartPage = () => {
       
       const createOrder = async (data) => {
         try {
-          const res = await axios.post("http://localhost:3000/api/orders", data);
+          const res = await axios.post("/api/orderdata", data);
           if (res.status === 201) {
             dispatch(reset());
             router.push(`/orders/${res.data._id}`);
@@ -131,9 +131,9 @@ const CartPage = () => {
                                     </TableCell>
                                     <TableCell align="right">{product.title}</TableCell>
                                     <TableCell align="right">{product.extraOptions.map(extra => <span key={extra._id}>{extra.text}</span>)}</TableCell>
-                                    <TableCell align="right">${product.price}</TableCell>
+                                    <TableCell align="right">${parseFloat(product.price).toFixed(2)}</TableCell>
                                     <TableCell align="right">{product.quantity}</TableCell>
-                                    <TableCell align="right">${product.price * product.quantity}</TableCell>
+                                    <TableCell align="right">${parseFloat(product.price * product.quantity).toFixed(2)}</TableCell>
                                 </TableRow>
                                 ))}
                         </TableBody>
@@ -145,13 +145,13 @@ const CartPage = () => {
                         <h3 className='text-xl font-bold'>CART TOTAL</h3>
                         <div className='py-3 text-lg font-semibold'>
                             <div className='flex gap-1'>
-                                <p>Subtotal:</p><span>${cart.total}</span>
+                                <p>Subtotal:</p><span>${parseFloat(cart.total).toFixed(2)}</span>
                             </div>
                             <div className='flex gap-1'>
                                 <p>Discount:</p><span>$0.00</span>
                             </div>
                             <div className='flex gap-1'>
-                                <p>Total:</p><span>${cart.total}</span>
+                                <p>Total:</p><span>${parseFloat(cart.total).toFixed(2)}</span>
                             </div>
                         </div>
                         <div className="w-full">
