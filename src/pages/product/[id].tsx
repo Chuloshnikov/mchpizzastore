@@ -1,9 +1,9 @@
 import React, { useState,  useEffect } from 'react';
 import { useRouter } from "next/router";
 import Image from 'next/image';
-import { sizes } from "../../../assets/index";
+import { sizes } from "../../assets/index";
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../../redux/cartSlice';
+import { addToCart } from '../../../redux/cartSlice';
 import axios from 'axios';
 
 
@@ -20,7 +20,7 @@ const ProductDetails = () => {
     const [price, setPrice] = useState<Number>(0);
     const [size, setSize] = useState(0);
     const [extras, setExtras] = useState([]);
-    //const [quantity, setQuantiny] = useState(1);
+    const [quantity, setQuantiny] = useState(1);
 
     useEffect(() => {
         if (!id) {
@@ -31,13 +31,33 @@ const ProductDetails = () => {
           setProduct(response.data);
           console.log(response.data);
           setPrice(response.data.prices[0]);
-          setExtras(response.data.extras);
-          
         })
         setLoading(false);
       },[id]);
     
       const _id = product._id;
+
+      const changePrice = (number) => {
+        setPrice(price + number);
+      };
+
+      const handleSize = (sizeIndex) => {
+        const difference = product.prices[sizeIndex] - product.prices[size];
+        setSize(sizeIndex);
+        changePrice(difference);
+      };
+
+      const handleChange = (e, option) => {
+        const checked = e.target.checked;
+    
+        if (checked) {
+          changePrice(option.price);
+          setExtras((prev) => [...prev, option]);
+        } else {
+          changePrice(-option.price);
+          setExtras(extras.filter((extra) => extra._id !== option._id));
+        }
+      };
 
 
 
@@ -80,22 +100,22 @@ const ProductDetails = () => {
                 </div>
                 <h3 className='font-bold text-lg'>Choose additional ingredients</h3>
                 <div className='flex items-center gap-2'>
-                    {/*
-                    {product.extraOptions.map((option, index) => ( 
-                        <div key={index} className='flex items-center gap-1'>
-                        <input 
-                            className='w-3 h-3 w-4 h-4 w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded
-                          focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2
-                          dark:bg-gray-700 dark:border-gray-600'
-                            type="checkbox" 
-                            id={option.text} 
-                            name={option.text}
-                        />
-                    <label htmlFor='double' className='text-base font-medium'>{option.text}</label>
+                    {product?.extraOptions?.map((option, index) => ( 
+                        <div key={index} className='flex text-center items-center gap-1'>
+                            <input 
+                                className='w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded
+                            focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2
+                            dark:bg-gray-700 dark:border-gray-600 mt-2'
+                                type="checkbox" 
+                                id={option.text} 
+                                name={option.text}
+                                onChange={(e) => handleChange(e, option)}
+                            />
+                            <label htmlFor='double' className='text-base font-medium'>{option.text}</label>
                         </div>
                     ))}
                     
-                    */}
+                    
                 </div>
                 <h3 className='font-bold text-lg'>Add to cart</h3>
                 <div className='flex gap-2'>
@@ -108,7 +128,7 @@ const ProductDetails = () => {
                       dark:bg-gray-700 dark:border-teal-500' 
                       type="number" />
                     <button className='bg-red-600 text-sm p-2.5 text-white font-semibold
-                     hover:bg-red-800 duration-300'
+                     hover:bg-red-800 duration-300 mb-2'
                      
                      >
                         Add to Cart
