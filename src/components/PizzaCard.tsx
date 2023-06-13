@@ -6,7 +6,7 @@ const PizzaCard = ({item}: any) => {
   console.log(item.extraOptions)
    return (
     <>
-    <Link href={`products/product/${item._id}`}
+    <Link href={`/product/${item._id}`}
         className='px-2 py-2 shadow-bannerShadow text-yellow-950 hover:bg-yellow-400 duration-300'
         >
         <div className="w-full overflow-hidden p-1">
