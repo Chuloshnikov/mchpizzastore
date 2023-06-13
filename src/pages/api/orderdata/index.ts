@@ -37,7 +37,9 @@ type Data = {
     }
 
     if (method === 'PUT') {
-
+      const { customer, address, total, status, method, phone, _id } = req.body;
+      await Order.updateOne({ _id }, { customer, address, total, status, method, phone });
+      res.json(true);
     }
 
     if (method === 'DELETE') {

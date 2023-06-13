@@ -21,6 +21,18 @@ const AdminOrdersList = () => {
     },  []);
     console.log(orders);
 
+    const orderStatus = (status) => {
+        if (status === 0) {
+            return "paid"
+        } else if (status === 1) {
+            return "preparing"
+        } else if (status === 2) {
+            return "on the way"
+        } else if (status === 3) {
+            return "delivered"
+        }
+    }
+
 
   return (
     <AdminLayout>
@@ -42,6 +54,7 @@ const AdminOrdersList = () => {
                                 <TableCell className='font-semibold'>Address</TableCell>
                                 <TableCell className='font-semibold'>Total</TableCell>
                                 <TableCell className='font-semibold'>Payment</TableCell>
+                                <TableCell className='font-semibold'>Status</TableCell>
                                 <TableCell className='font-semibold'>Delete</TableCell>
                                 <TableCell className='font-semibold'>Edit</TableCell>
                             </TableRow>
@@ -74,6 +87,9 @@ const AdminOrdersList = () => {
                                     {order?.method === 1 ? ('card or paypal') : ('cash')}
                                 </TableCell>
                                 <TableCell align="right">
+                                    {orderStatus(order?.status)}
+                                </TableCell>
+                                <TableCell align="right">
                                     <Link 
                                     className='bg-yellow-400 text-white p-1 px-1 text-base font-semibold
                                     hover:bg-yellow-500 duration-300 flex items-center justify-center'
@@ -86,7 +102,7 @@ const AdminOrdersList = () => {
                                     <Link 
                                     className='bg-yellow-400 text-white p-1 px-1 text-base font-semibold
                                     hover:bg-yellow-500 duration-300 flex items-center justify-center'
-                                    href={`/admin/product/edit/${order._id}`}>
+                                    href={`/admin/order/edit/${order._id}`}>
                                         <BsPencilSquare/>
                                         <span>Edit</span>
                                     </Link>
