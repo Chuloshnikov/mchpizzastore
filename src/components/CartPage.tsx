@@ -158,29 +158,28 @@ const CartPage = () => {
                         {open ? (
                                 <div>
                                     <button
-                                    className='p-2.5 bg-white text-red-600 text-lg font-semibold 
-                                    hover:scale-105 duration-300'   
+                                    className='p-2.5 w-full mb-2 bg-white text-green-500 text-lg font-bold 
+                                    hover:bg-green-500 hover:text-white duration-300'   
                                     onClick={() => setCash(true)}
                                     >
                                     CASH ON DELIVERY
                                     </button>
                                     <PayPalScriptProvider
                                         options={{
-                                            "client-id":
-                                                "ATTL8fDJKfGzXNH4VVuDy1qW4_Jm8S0sqmnUTeYtWpqxUJLnXIn90V8YIGDg-SNPaB70Hg4mko_fde4-",
+                                            "client-id": "AcId4gnuiT-clTk53utijX2EXuRWaQIEaoSnU-dyE0oFjOr-yqYexsQtd2gF3bu1a07u_VxDu0pNs9rh",
                                                 components: "buttons",
                                                 currency: "USD",
                                                 "disable-funding": "credit,card,p24",
                                             }}
                                             >
-                                            <ButtonWrapper currency={currency} showSpinner={false} />
+                                                <ButtonWrapper currency={currency} showSpinner={false} />
                                             </PayPalScriptProvider>
                                 </div>
                                 ) : (
                                 <button 
                                 onClick={() => setOpen(true)}
-                                className='p-2.5 bg-white text-red-600 text-lg font-semibold 
-                                hover:scale-105 duration-300'
+                                className='p-2.5 mb-2 w-full bg-white text-red-600 text-lg font-bold 
+                                hover:text-green-500 duration-300'
                                 >
                                     CHECKOUT NOW!
                                 </button>)}

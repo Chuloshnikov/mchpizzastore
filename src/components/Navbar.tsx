@@ -37,12 +37,6 @@ const Navbar = () => {
                     </Link>
                     </li>
                   <li className='hover:text-white hover:scale-105 focus:text-white focusLscale-105 duration-300'>
-                    <a className='xs:hidden mdl:block' href="#products">
-                                        
-                        Products
-                    </a>
-                    </li>
-                  <li className='hover:text-white hover:scale-105 focus:text-white focusLscale-105 duration-300'>
                     <Link className='xs:hidden mdl:block' href="/">
                         Menu
                     </Link>
@@ -56,11 +50,6 @@ const Navbar = () => {
                     <Link className='xs:hidden mdl:block' href="/">
                         Events
                     </Link>
-                  </li>
-                  <li className='hover:text-white hover:scale-105 focus:text-white focusLscale-105 duration-300'>
-                  <Link className='xs:hidden mdl:block' href="/">
-                      Blog
-                  </Link>
                   </li>
                   <li className='hover:text-white hover:scale-105 focus:text-white focusLscale-105 duration-300'>
                     <Link className='xs:hidden mdl:block' href="/">
