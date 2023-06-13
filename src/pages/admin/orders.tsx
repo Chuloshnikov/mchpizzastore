@@ -1,14 +1,33 @@
-import AdminLayout from '@/components/AdminLayout';
-import React from 'react'
+import AdminOrdersList from '@/components/AdminOrdersList';
+import { getSession, useSession } from 'next-auth/react';
+
 
 const Orders = () => {
+  const { data: session } = useSession();
+
+
   return (
-    <AdminLayout>
         <div>
-            orders
+            <AdminOrdersList/>
         </div>
-    </AdminLayout>
   )
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if(!session) {
+    return {
+      redirect: {
+        destination: '/admin',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: { session }
+  } 
 }
 
 export default Orders;
