@@ -25,6 +25,11 @@ const AdminOrdersList = () => {
   return (
     <AdminLayout>
         <div className='flex flex-col gap-3 h-screen mb-12'>
+        <div className='flex items-center justify-center'>
+                <div className='flex flex-col items-center gap-3 max-w-[800px]'>
+                    <h2 className='text-yellow-950 text-xl font-semibold'>Orders management</h2>
+                </div>
+            </div>
         <div className='flex justify-center'>
                 <TableContainer className='max-w-[800px]' component={Paper}>
                     <Table aria-label="simple table">
@@ -72,7 +77,7 @@ const AdminOrdersList = () => {
                                     <Link 
                                     className='bg-yellow-400 text-white p-1 px-1 text-base font-semibold
                                     hover:bg-yellow-500 duration-300 flex items-center justify-center'
-                                    href={`/admin/product/delete/${order._id}`}>
+                                    href={`/admin/order/delete/${order._id}`}>
                                         <BsFillTrashFill/>
                                         <span>Delete</span>
                                     </Link>
