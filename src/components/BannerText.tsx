@@ -9,7 +9,7 @@ const BannerText = ({ title, description, btnText, className}:Props) => {
   return (
     <div className={className}>
         <h1 className='font-bold text-2xl'>{title}</h1>
-        <p className='text-sm leading-5'>
+        <p className='text-sm font-bold leading-5'>
             {description}
         </p>
         <button className='bg-red-500 text-sm

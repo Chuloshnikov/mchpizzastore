@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import Image from 'next/image';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,6 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 import styles from '../../styles/OrderStatusItems.module.css';
 
@@ -26,8 +28,21 @@ function createData(
   ];
 
 const Order = () => {
+    const router = useRouter();
+    const {id} = router.query;
+    const [order, setOrder] = useState('');
+    console.log(order);
 
-    const status = 0;
+    useEffect(() => {
+        if (!id) {
+            return;
+          }
+          axios.get(`/api/orderdata?id=${id}`).then(response => {
+            setOrder(response.data);
+          })
+    }, [id])
+
+    const status = order.status;
 
     const statusClass = (index) => {
         if (index - status < 1) return styles.done;
@@ -51,19 +66,17 @@ const Order = () => {
                                 </TableRow>
                             </TableHead>
                                 <TableBody>
-                                    {rows.map((row) => (
                                     <TableRow
-                                        key={row.name}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                     <TableCell component="th" scope="row">
-                                        {row._id}
+                                        {order._id}
                                     </TableCell>
-                                        <TableCell align="right">{row.customer}</TableCell>
-                                        <TableCell align="right">{row.address}</TableCell>
-                                        <TableCell align="right">${row.total}</TableCell>
+                                        <TableCell align="right">{order.customer}</TableCell>
+                                        <TableCell align="right">{order.address}</TableCell>
+                                        <TableCell align="right">${parseFloat(order.total).toFixed(2)}</TableCell>
                                     </TableRow>
-                                    ))}
+                                
                                 </TableBody>
                         </Table>
                     </TableContainer>
@@ -79,7 +92,7 @@ const Order = () => {
                         </div>
                     </div>
                     <div className={styles.status}>
-                        <div className={statusClass(0)}>
+                        <div className={statusClass(1)}>
                             <Image src={bake} width={50} height={50} alt="bake"/>
                             <span>Preparing</span>
                             <div className={styles.checkedIcon}>
@@ -88,7 +101,7 @@ const Order = () => {
                         </div>
                     </div>
                     <div className={styles.status}>
-                        <div className={statusClass(1)}>
+                        <div className={statusClass(2)}>
                             <Image src={bike} width={50} height={50} alt="bike"/>
                             <span>On the way</span>
                             <div className={styles.checkedIcon}>
@@ -97,7 +110,7 @@ const Order = () => {
                         </div>
                     </div>
                     <div className={styles.status}>
-                        <div className={statusClass(2)}>
+                        <div className={statusClass(3)}>
                             <Image src={delivered} width={50} height={50} alt="delivered"/>
                             <span>Delivered</span>
                             <div className={styles.checkedIcon}>
@@ -112,13 +125,13 @@ const Order = () => {
                         <h3 className='text-xl font-bold'>CART TOTAL</h3>
                         <div className='py-3 text-lg font-semibold'>
                             <div className='flex gap-1'>
-                                <p>Subtotal:</p><span>$22</span>
+                                <p>Subtotal:</p><span>${parseFloat(order.total).toFixed(2)}</span>
                             </div>
                             <div className='flex gap-1'>
-                                <p>Discount:</p><span>$22</span>
+                                <p>Discount:</p><span>$0.00</span>
                             </div>
                             <div className='flex gap-1'>
-                                <p>Total:</p><span>$22</span>
+                                <p>Total:</p><span>${parseFloat(order.total).toFixed(2)}</span>
                             </div>
                         </div>
                         <button type="button" className='cursor-not-allowed p-2.5 bg-white text-green-500 text-lg font-semibold duration-300'>PAID</button>
@@ -128,5 +141,6 @@ const Order = () => {
     </div>
   )
 }
+
 
 export default Order;
