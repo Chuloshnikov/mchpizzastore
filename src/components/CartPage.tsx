@@ -16,6 +16,7 @@ import {
     PayPalButtons,
     usePayPalScriptReducer,
   } from "@paypal/react-paypal-js";
+  import OrderDetail from "./OrderDetail";
 
 
 
@@ -173,7 +174,7 @@ const CartPage = () => {
                                             }}
                                             >
                                                 <ButtonWrapper currency={currency} showSpinner={false} />
-                                            </PayPalScriptProvider>
+                                      </PayPalScriptProvider>
                                 </div>
                                 ) : (
                                 <button 
@@ -182,9 +183,13 @@ const CartPage = () => {
                                 hover:text-green-500 duration-300'
                                 >
                                     CHECKOUT NOW!
-                                </button>)}
+                                </button>
+                              )}
                         </div>
                 </div>
+                {cash && (
+                  <OrderDetail total={cart.total} createOrder={createOrder}/>
+                )}
             </div>
         </div>
     </>
