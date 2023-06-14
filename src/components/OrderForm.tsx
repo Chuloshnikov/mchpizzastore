@@ -2,6 +2,12 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
+type Order = {
+  title: string;
+  price: string;
+  quantity:string;
+  extras:string;
+}
 type Data = {
   _id: any;
   customer: string;
@@ -10,6 +16,7 @@ type Data = {
   status: number;
   method: number;
   phone: string;
+  cartOrder: Order;
 }[];
 
 interface OrderFormProps {
@@ -20,6 +27,7 @@ interface OrderFormProps {
   status: number;
   method: number;
   phone: string;
+  cartOrder: Order;
 }
 
 const OrderForm: React.FC<OrderFormProps>  = ({
@@ -30,24 +38,25 @@ const OrderForm: React.FC<OrderFormProps>  = ({
   status: existingStatus,
   method: existingMethod,
   phone: existingPhone,
+  cartOrder: existingCartOrder,
 }) => {
   const [customer, setCustomer] = useState<string>(existingCustomer || '');
   const [address, setAddress] = useState<string>(existingAddress || '');
   const [total, setTotal] = useState<number>(existingTotal || '');
   const [status, setStatus] = useState<number>(existingStatus || '');
   const [method, setMethod] = useState<number>(existingMethod || '');
-  const [phone, setPhone] = useState<string>('');
+  const [phone, setPhone] = useState<string>(existingPhone || '');
+  const [cartOrder, setCartOrder] = useState<Order>(existingCartOrder || [])
   const [goToOrders, setGoToOrders] = useState<boolean>(false);
   const router = useRouter();
+  console.log(status);
 
   const handleChange = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data: Data = { customer, address, total, status, method, phone, };
-    if (!_id) {
-      return
-    } else {
+    const data: Data = { customer, address, total, status, method, phone, cartOrder};
+    if (_id) {
       await axios.put('/api/productdata', { ...data, _id });
-    }
+    } 
     setGoToOrders(true);
   };
 

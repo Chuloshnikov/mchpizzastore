@@ -41,6 +41,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
   const [extra, setExtra] = useState<any>(null);
   const [goToProducts, setGoToProducts] = useState<boolean>(false);
   const router = useRouter();
+  
 
   const changePrice = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const currentPrices = [...prices];

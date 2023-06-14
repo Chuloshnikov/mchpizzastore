@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "redux/cartSlice.js", "redux/store.jsx", "lib/dbConnect.js"],
   "exclude": ["node_modules"]
 }

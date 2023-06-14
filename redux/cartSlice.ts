@@ -1,4 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface Product {
+  id: string;
+  price: number;
+  quantity: number;
+}
+
+interface CartState {
+  products: Product[];
+  quantity: number;
+  total: number;
+}
 
 const cartSlice = createSlice({
   name: "cart",
@@ -6,9 +18,9 @@ const cartSlice = createSlice({
     products: [],
     quantity: 0,
     total: 0,
-  },
+  } as CartState,
   reducers: {
-    addProduct: (state, action) => {
+    addProduct: (state, action: PayloadAction<Product>) => {
       state.products.push(action.payload);
       state.quantity += 1;
       state.total += action.payload.price * action.payload.quantity;
