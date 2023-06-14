@@ -21,7 +21,7 @@ const AdminOrdersList = () => {
     },  []);
     console.log(orders);
 
-    const orderStatus = (status) => {
+    const orderStatus = (status: number): string => {
         if (status === 0) {
             return "paid"
         } else if (status === 1) {
@@ -31,8 +31,9 @@ const AdminOrdersList = () => {
         } else if (status === 3) {
             return "delivered"
         }
+        return "unknown";
     }
-
+    
 
   return (
     <AdminLayout>

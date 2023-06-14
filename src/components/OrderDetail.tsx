@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 
-const OrderDetail = ({ total, createOrder }) => {
+const OrderDetail = ({ total, cartDetails, createOrder }) => {
 
     const [customer, setCustomer] = useState("");
     const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
 
     const handleClick = () => {
-        createOrder({ customer, address, total, method: 0 });
+        createOrder({ customer, address, total, phone, method: 0, cartOrder: cartDetails });
     }
 
   return (
@@ -28,6 +29,7 @@ const OrderDetail = ({ total, createOrder }) => {
                     type="text"
                     placeholder="Enter your phone number"
                     className='text-gray-900 focus:border-yellow-600 focus:border-1 focus:ring-0 py-1 px-2'
+                    onChange={(e) => setPhone(e.target.value)}
                 />
             </div>
             <div className='flex flex-col mt-2'>

@@ -7,7 +7,23 @@ import { addProduct } from "../../../redux/cartSlice";
 import axios from 'axios';
 
 
+type Pizza = {
+  createdAt: string;
+  description: string;
+  extraOptions: Option[];
+  img: string;
+  prices: number[];
+  title: string;
+  updatedAt: string;
+  __v: number;
+  _id: string;
+};
 
+type Option = {
+  text: string;
+  price: number;
+  _id: string;
+};
 
 const ProductDetails = () => {
     const router = useRouter();
@@ -18,22 +34,22 @@ const ProductDetails = () => {
     
     // product manipulation
     const [price, setPrice] = useState<Number>(0);
-    const [size, setSize] = useState(0);
+    const [size, setSize] = useState<Number>(0);
     const [extras, setExtras] = useState([]);
     const [quantity, setQuantiny] = useState(1);
 
     useEffect(() => {
-        if (!id) {
-          return;
-        }
-        setLoading(true);
-        axios.get(`/api/productdata?id=${id}`).then(response => {
-          setProduct(response.data);
-          console.log(response.data);
-          setPrice(response.data.prices[0]);
-        })
+      if (!id) {
+        return;
+      }
+      setLoading(true);
+      axios.get<Pizza>(`/api/productdata?id=${id}`).then(response => {
+        setProduct(response.data);
+        setPrice(response.data.prices[0]);
+      }).finally(() => {
         setLoading(false);
-      },[id]);
+      });
+    }, [id]);
     
       const _id = product._id;
 
@@ -62,14 +78,14 @@ const ProductDetails = () => {
       const handleClick = () => {
         dispatch(addProduct({...product, extras, price, quantity}));
       };
-
+      console.log(product.img);
 
 
   return (
     <div className='w-full bg-white text-gray-800 px-4'>
         <div className='max-w-contentContainer mx-auto flex items-center py-4 xs:flex-col lg:flex-row'>
             <div className='w-2/3 h-full xs:w-full flex items-center justify-center overflow-hidden relative'>
-                <Image src={product.img} width={700} height={500}/>
+                <img src={product.img} width={700} height={500} alt="pizza"/>
             </div>
             <div className='w-1/3 h-full xs:w-full flex flex-col justify-start gap-2 p-4'>
                 <h3 className='font-bold text-2xl'>{product.title}</h3>
@@ -104,8 +120,8 @@ const ProductDetails = () => {
                 </div>
                 <h3 className='font-bold text-lg'>Choose additional ingredients</h3>
                 <div className='flex items-center gap-2'>
-                    {product?.extraOptions?.map((option, index) => ( 
-                        <div key={index} className='flex text-center items-center gap-1'>
+                    {product?.extraOptions?.map((option) => ( 
+                        <div key={product._id} className='flex text-center items-center gap-1'>
                             <input 
                                 className='w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded
                             focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2

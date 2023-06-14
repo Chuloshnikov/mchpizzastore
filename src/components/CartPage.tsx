@@ -17,6 +17,8 @@ import {
     usePayPalScriptReducer,
   } from "@paypal/react-paypal-js";
   import OrderDetail from "./OrderDetail";
+import { BsPhone } from "react-icons/bs";
+import { extractEventHandlers } from "@mui/base";
 
 
 
@@ -29,10 +31,27 @@ const CartPage = () => {
     const style = { layout: "vertical" };
     const dispatch = useDispatch();
     const router = useRouter();
-    
-    
 
-      
+    function orderData(cart) {
+      // Перетворюємо масив об'єктів на масив рядків
+      const dataStrings = cart.products.map(product => {
+        // Отримуємо дані, які вам потрібні з кожного об'єкта
+        const { title, extras, price, quantity } = product;
+        // Формуємо рядок з даними об'єкта
+        return {
+          title: `Title: ${title}`,
+          price: `Price: ${price}`,
+          quantity: `Quantity: ${quantity}`,
+          extras: `Extras: ${extras.map(extra => `${extra.text}`)}`,
+        };
+      });
+    
+      // Повертаємо масив об'єктів зі строками
+      return dataStrings;
+    }
+
+    console.log(orderData(cart));
+    const cartDetails = orderData(cart);
       
       const createOrder = async (data) => {
         try {
@@ -95,6 +114,8 @@ const CartPage = () => {
                 address: shipping.address.address_line_1,
                 total: cart.total,
                 method: 1,
+                phone: phone,
+                cartOrder: cartDetails,
               });
             });
           }}
@@ -128,7 +149,7 @@ const CartPage = () => {
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                     <TableCell component="th" scope="row">
-                                        <Image src={product.img} alt="product" width={100} height={50} alt="product"/>
+                                        <Image src={product.img} width={100} height={50} alt="product"/>
                                     </TableCell>
                                     <TableCell align="right">{product.title}</TableCell>
                                     <TableCell align="right">{product.extraOptions.map(extra => <span key={extra._id}>{extra.text}</span>)}</TableCell>
@@ -188,7 +209,7 @@ const CartPage = () => {
                         </div>
                 </div>
                 {cash && (
-                  <OrderDetail total={cart.total} createOrder={createOrder}/>
+                  <OrderDetail total={cart.total} cartDetails={cartDetails} createOrder={createOrder}/>
                 )}
             </div>
         </div>

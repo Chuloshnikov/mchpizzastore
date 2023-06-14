@@ -34,7 +34,7 @@ const DeleteProductPage = () => {
     <AdminLayout>
         <div className='mb-[8%] mt-[8%]'>
             <h1 className='text-center text-2xl text-yellow-950 font-semibold mb-8'>
-                Do you really want to delete product &nbsp;"{productInfo?.title}"?
+                Do you really want to delete product &nbsp;&quot;{productInfo?.title}&quot;?
             </h1>
             <div className='flex gap-1 justify-center'>
                 <button 

@@ -14,18 +14,7 @@ import styles from '../../styles/OrderStatusItems.module.css';
 
 import { paid, bake, bike, delivered, checked } from '../../assets/index';
 
-function createData(
-    _id: number,
-    customer: string,
-    address: string,
-    total: number,
-  ) {
-    return { _id, customer, address, total };
-  }
-  
-  const rows = [
-    createData(34534534545, "John Doe", "Edwards str 30/11", '54'),
-  ];
+
 
 const Order = () => {
     const router = useRouter();
