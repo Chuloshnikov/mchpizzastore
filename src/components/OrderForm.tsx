@@ -13,7 +13,7 @@ type Data = {
   customer: string;
   address: string;
   total: number;
-  status: number;
+  status: number | string;
   method: number;
   phone: string;
   cartOrder: Order;
@@ -24,7 +24,7 @@ interface OrderFormProps {
   customer: string;
   address: string;
   total: number;
-  status: number;
+  status: number | string;
   method: number;
   phone: string;
   cartOrder: Order;
@@ -43,8 +43,8 @@ const OrderForm: React.FC<OrderFormProps>  = ({
   const [customer, setCustomer] = useState<string>(existingCustomer || '');
   const [address, setAddress] = useState<string>(existingAddress || '');
   const [total, setTotal] = useState<number>(existingTotal || '');
-  const [status, setStatus] = useState<number>(existingStatus || '');
-  const [method, setMethod] = useState<number>(existingMethod || '');
+  const [status, setStatus] = useState<number>(existingStatus || 0);
+  const [method, setMethod] = useState<number>(existingMethod || 0);
   const [phone, setPhone] = useState<string>(existingPhone || '');
   const [cartOrder, setCartOrder] = useState<Order>(existingCartOrder || [])
   const [goToOrders, setGoToOrders] = useState<boolean>(false);
@@ -54,8 +54,9 @@ const OrderForm: React.FC<OrderFormProps>  = ({
   const handleChange = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data: Data = { customer, address, total, status, method, phone, cartOrder};
+    console.log(data);
     if (_id) {
-      await axios.put('/api/productdata', { ...data, _id });
+      await axios.put('/api/orderdata', { ...data, _id });
     } 
     setGoToOrders(true);
   };
@@ -89,20 +90,20 @@ const OrderForm: React.FC<OrderFormProps>  = ({
             value={status}
             onChange={(e) => setStatus(Number(e.target.value))}
           >
-            <option value="0">paid</option>
-            <option value="1">preparing</option>
-            <option value="2">on the way</option>
-            <option value="3">delivered</option>
+            <option value={0}>paid</option>
+            <option value={1}>preparing</option>
+            <option value={2}>on the way</option>
+            <option value={3}>delivered</option>
           </select>
 
           <label>Method:</label>
           <select
             className="focus:border-yellow-600 focus:border-1 focus:ring-0"
             value={method}
-            onChange={(e) => setMethod(Number(e.target.value))}
+            onChange={(e) => setMethod(e.target.value)}
           >
-            <option value="0">cash</option>
-            <option value="1">card or paypal</option>
+            <option value={0}>cash</option>
+            <option value={1}>card or paypal</option>
           </select>
         <label>Total (in USD):</label>
         <input
@@ -120,6 +121,7 @@ const OrderForm: React.FC<OrderFormProps>  = ({
         onChange={(e) => setPhone(e.target.value)}
         />
         <button
+          onClick={handleChange}
           className="bg-yellow-400 text-white p-1 px-2 text-base font-semibold hover:bg-yellow-500 duration-300 mt-2"
           type="submit"
         >
