@@ -10,6 +10,7 @@ const EditOrderPage = () => {
     const { data: session } = useSession();
     const router = useRouter();
     const {id} = router.query;
+    console.log(orderInfo);
 
     useEffect(() => {
         if (!id) {
