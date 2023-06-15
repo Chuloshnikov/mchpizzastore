@@ -19,6 +19,7 @@ import bake from './icons/bake.png';
 import bike from './icons/bike.png';
 import delivered from './icons/delivered.png';
 import checked from './icons/checked.png';
+import restourantOne from './images/restourant.jpg';
 
 
 export {
@@ -42,5 +43,6 @@ export {
     checked,
     bake,
     bike,
-    delivered
+    delivered,
+    restourantOne
 };
