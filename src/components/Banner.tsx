@@ -224,7 +224,8 @@ const Banner = () => {
                 <h2 className='xs:text-sm md:text-xl font-semibold text-black'>
                     Visit our restaurants
                 </h2>
-                <Link className='xs:text-sm md:text-base text-[#8D8586] underline underline-offset-2' href="/">
+                <Link className='xs:text-sm md:text-base text-[#8D8586] 
+                underline underline-offset-2 hover:text-yellow-500 duration-200' href="/contacts">
                     To restorants
                 </Link>
             </div>
