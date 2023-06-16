@@ -21,7 +21,7 @@ const EditProductPage = () => {
 
   return (
     <AdminLayout>
-        <h1>Edit Product</h1>
+        <h1 className='my-5 mx-auto text-2xl font-bold text-center'>Edit Product</h1>
         {productInfo && <ProductsForm {...productInfo}/>}
         
     </AdminLayout>
