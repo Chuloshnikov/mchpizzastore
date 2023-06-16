@@ -44,7 +44,7 @@ const EventForm: React.FC<ProductFormProps> = ({
         data.append("upload_preset", "mchpizzauploads");
         try {
             const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/duufrpcxn/image/upload", data);
-            const { url } = uploadRes.data;
+            const url  = uploadRes.data;
       const eventData = {
                     title,
                     subtitle,
