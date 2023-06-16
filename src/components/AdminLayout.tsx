@@ -4,6 +4,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { MdDashboard }from "react-icons/md";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
+import { BsFillBalloonFill } from "react-icons/bs";
 
 const AdminLayout = ({ children } :any ) => {
   return (
@@ -25,7 +26,12 @@ const AdminLayout = ({ children } :any ) => {
                         <Link href="/admin/orders">
                             <AiOutlineUnorderedList className='hover:text-white duration-200'/>
                         </Link>
-                        </li>
+                    </li>
+                    <li>
+                        <Link href="/admin/events">
+                            <BsFillBalloonFill className='hover:text-white duration-200'/>
+                        </Link>
+                    </li>
                     <li>
                         <FaSignOutAlt onClick={() => signOut()} className='hover:text-white duration-200'/>
                     </li>

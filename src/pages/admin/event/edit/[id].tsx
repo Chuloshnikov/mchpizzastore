@@ -2,32 +2,30 @@ import React, { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import OrderForm from '../../../../components/OrderForm';
+import EventForm from '../../../../components/EventForm';
 import { getSession, useSession } from 'next-auth/react';
 
-const EditOrderPage = () => {
-    const [orderInfo, setOrderInfo] = useState(null);
+const EditEventPage = () => {
+    const [eventInfo, setEventInfo] = useState(null);
     const { data: session } = useSession();
     const router = useRouter();
     const {id} = router.query;
-    console.log(orderInfo);
-
     useEffect(() => {
-        if (!id) {
-          return;
-        }
-        axios.get(`/api/orderdata?id=${id}`).then(response => {
-          setOrderInfo(response.data);
-        })
-      }, [id]);
+      if (!id) {
+        return;
+      }
+      axios.get(`/api/eventdata?id=${id}`).then(response => {
+        setEventInfo(response.data);
+      })
+    }, [id]);
 
-      return (
+    return (
         <AdminLayout>
-            <h1 className='my-5 mx-auto text-2xl font-bold text-center'>Edit Order</h1>
-            {orderInfo && <OrderForm {...orderInfo}/>}
-            
+            <h1 className='my-5 mx-auto text-2xl font-bold text-center'>Edit Event</h1>
+            {eventInfo && <EventForm {...eventInfo}/>}
+        
         </AdminLayout>
-      )
+    )
 }
 
 export async function getServerSideProps({ req }) {
@@ -45,6 +43,6 @@ export async function getServerSideProps({ req }) {
     return {
       props: { session }
     } 
-  }
+}
 
-export default EditOrderPage;
+export default EditEventPage;
