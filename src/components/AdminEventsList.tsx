@@ -1,9 +1,27 @@
 import React, {useState, useEffect }  from 'react';
 import AdminLayout from './AdminLayout';
+import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { BsFillTrashFill, BsPencilSquare } from "react-icons/bs";
 
 const AdminEventsList = () => {
+    const [events, setEvents] = useState();
+    useEffect(() => {
+        axios.get("/api/eventdata").then(response => {
+            setEvents(response.data);
+        });
+        
+    },  []);
+    console.log(events);
+
   return (
     <div>
         <AdminLayout>
@@ -22,6 +40,53 @@ const AdminEventsList = () => {
                       </div>
                   </div>
               </div>
+              <div className='flex justify-center'>
+                <TableContainer className='max-w-[800px]' component={Paper}>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className='font-semibold'>Event title</TableCell>
+                                <TableCell className='font-semibold'>Event image</TableCell>
+                                <TableCell className='font-semibold' align="right">Delete</TableCell>
+                                <TableCell className='font-semibold' align="right">Edit</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {events?.map(event => (
+                                <TableRow
+                                    key={event?._id}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                <TableCell component="th" scope="row">
+                                {event?.title}
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Image src={event?.img} alt="productImg" width={40} height={40}/>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Link 
+                                    className='bg-yellow-400 text-white p-1 px-1 text-base font-semibold
+                                    hover:bg-yellow-500 duration-300 flex items-center justify-center'
+                                    href={`/admin/product/delete/${event._id}`}>
+                                        <BsFillTrashFill/>
+                                        <span>Delete</span>
+                                    </Link>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Link 
+                                    className='bg-yellow-400 text-white p-1 px-1 text-base font-semibold
+                                    hover:bg-yellow-500 duration-300 flex items-center justify-center'
+                                    href={`/admin/product/edit/${event._id}`}>
+                                        <BsPencilSquare/>
+                                        <span>Edit</span>
+                                    </Link>
+                                </TableCell>
+                            </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
             </div>
         </AdminLayout>
     </div>
