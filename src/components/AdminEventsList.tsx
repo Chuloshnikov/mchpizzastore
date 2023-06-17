@@ -67,7 +67,7 @@ const AdminEventsList = () => {
                                     <Link 
                                     className='bg-yellow-400 text-white p-1 px-1 text-base font-semibold
                                     hover:bg-yellow-500 duration-300 flex items-center justify-center'
-                                    href={`/admin/product/delete/${event._id}`}>
+                                    href={`/admin/event/delete/${event._id}`}>
                                         <BsFillTrashFill/>
                                         <span>Delete</span>
                                     </Link>
