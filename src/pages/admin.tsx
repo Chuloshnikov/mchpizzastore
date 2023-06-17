@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSession, signIn } from "next-auth/react";
 import AdminLayout from '@/components/AdminLayout';
+import AdminDashboard from '@/components/AdminDashboard';
 
 const Admin = () => {
   const [username, setUserName] = useState<String>();
@@ -55,7 +56,7 @@ const Admin = () => {
   return (
     <div className='bg-white flex max-w-contentContainer mx-auto'>
         <AdminLayout>
-            dashboard
+            <AdminDashboard/>
         </AdminLayout>
     </div>
   )
