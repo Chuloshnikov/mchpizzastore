@@ -53,6 +53,7 @@ const EventForm: React.FC<ProductFormProps> = ({
                 }
                 setGoToEvents(true);            
     };
+    
 
     if (goToEvents) {
         router.push('/admin/events');
