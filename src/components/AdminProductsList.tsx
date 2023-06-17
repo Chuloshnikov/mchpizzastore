@@ -20,7 +20,6 @@ const AdminProductsList = () => {
         });
         
     },  []);
-    console.log(products);
 
   return (
     <AdminLayout>
