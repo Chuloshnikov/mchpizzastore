@@ -23,7 +23,7 @@ interface ProductFormProps {
   prices: number[];
   img: string;
   extraOptions: ExtraOption[];
-}
+};
 
 const ProductForm: React.FC<ProductFormProps> = ({
   _id,

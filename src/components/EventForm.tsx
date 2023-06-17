@@ -18,7 +18,7 @@ type Data = {
     subtitle: string;
     eventDate: string;
     description: string;
-  }
+  };
 
 const EventForm: React.FC<ProductFormProps> = ({
     _id,
@@ -36,43 +36,62 @@ const EventForm: React.FC<ProductFormProps> = ({
     const [description, setDescription] = useState<string>(existingDescription || '');
     const [goToEvents, setGoToEvents] = useState<boolean>(false);
     const router = useRouter();
-
+    console.log(img);
 
     const handleCreate = async () => {
-        const data = new FormData();
-        data.append("file", file);
-        data.append("upload_preset", "mchpizzauploads");
-        try {
-            const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/duufrpcxn/image/upload", data);
-            const url  = uploadRes.data;
-      const eventData = {
-                    title,
-                    subtitle,
-                    eventDate,
-                    description,
-                    img: url,
-                };
-                if (id) {
+            const eventData: Data = {
+                img,
+                title,
+                subtitle,
+                eventDate,
+                description,
+            };
+                if (_id) {
                     await axios.put("/api/eventdata", {...eventData, _id});
                 } else {
                     await axios.post("/api/eventdata", eventData);
                 }
-                setGoToEvents(true);
-                
-            } catch (err) {
-                console.log(err);
-            }
-    }
+                setGoToEvents(true);            
+    };
 
     if (goToEvents) {
         router.push('/admin/events');
     }
 
+    const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+          const file = e.target.files[0];
+          setFile(file);
+      
+          const data = new FormData();
+          data.append("file", file);
+          data.append("upload_preset", "mchpizzauploads");
+      
+          try {
+            const response = await axios.post(
+              `https://api.cloudinary.com/v1_1/duufrpcxn/image/upload`,
+              data,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data"
+                }
+              }
+            );
+      
+            const imageUrl = response.data.secure_url;
+            setImg(imageUrl);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      };
+
+
   return (
         <div>
             <form onSubmit={handleCreate} className="flex flex-col max-w-[400px] mx-auto">
                 <label>Choose an image</label>
-                    <input type="file" onChange={(e) => setImg(e.target.files)} />
+                    <input type="file" onChange={handleFileChange} />
                 <label>Event title</label>
                     <input
                     className="focus:border-yellow-600 focus:border-1 focus:ring-0"
@@ -115,4 +134,4 @@ const EventForm: React.FC<ProductFormProps> = ({
   )
 }
 
-export default EventForm
+export default EventForm;
