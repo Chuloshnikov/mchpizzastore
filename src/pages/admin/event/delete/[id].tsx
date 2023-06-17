@@ -22,7 +22,7 @@ const DeleteProductPage = () => {
     }, [id]);
 
     const goBack = () => {
-        router.push('/admin/products');
+        router.push('/admin/events');
     }
 
     const deleteEvent = async () => {

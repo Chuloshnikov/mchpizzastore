@@ -76,7 +76,7 @@ const AdminEventsList = () => {
                                     <Link 
                                     className='bg-yellow-400 text-white p-1 px-1 text-base font-semibold
                                     hover:bg-yellow-500 duration-300 flex items-center justify-center'
-                                    href={`/admin/product/edit/${event._id}`}>
+                                    href={`/admin/event/edit/${event._id}`}>
                                         <BsPencilSquare/>
                                         <span>Edit</span>
                                     </Link>

@@ -36,22 +36,16 @@ const EventForm: React.FC<ProductFormProps> = ({
     const [description, setDescription] = useState<string>(existingDescription || '');
     const [goToEvents, setGoToEvents] = useState<boolean>(false);
     const router = useRouter();
-    console.log(img);
 
-    const handleCreate = async () => {
-            const eventData: Data = {
-                img,
-                title,
-                subtitle,
-                eventDate,
-                description,
-            };
-                if (_id) {
-                    await axios.put("/api/eventdata", {...eventData, _id});
-                } else {
-                    await axios.post("/api/eventdata", eventData);
-                }
-                setGoToEvents(true);            
+    const handleCreate = async (e: FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            const eventData: Data = { img, title, subtitle, eventDate, description };    
+            if (_id) {
+              await axios.put("/api/eventdata", {...eventData, _id});
+            } else {
+              await axios.post("/api/eventdata", eventData);
+            }
+            setGoToEvents(true); 
     };
     
 
