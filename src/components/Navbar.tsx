@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { SlCallEnd } from 'react-icons/sl';
 import { MdOutlineShoppingBasket } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -13,6 +13,26 @@ const Navbar = () => {
 
   const [openMenu, setOpenMenu] = useState(false);
   const quantity = useSelector(state => state.cart.quantity);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleDocumentClick = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpenMenu(false);
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
+
+
+  const toogleMenu = () => {
+    setOpenMenu(!openMenu);
+  }
 
   return (
     <div className='w-full bg-yellow-400 text-yellow-950 px-4 py-4 sticky top-0 z-50'>
@@ -37,7 +57,7 @@ const Navbar = () => {
                     </Link>
                     </li>
                   <li className='hover:text-white hover:scale-105 focus:text-white focusLscale-105 duration-300'>
-                    <Link className='xs:hidden mdl:block' href="/">
+                    <Link className='xs:hidden mdl:block' href="/menu">
                         Menu
                     </Link>
                     </li>
@@ -71,11 +91,49 @@ const Navbar = () => {
                   </span>
               </Link>
             </div>
-            <div className='xs:block mdl:hidden' onClick={() => {
-              setOpenMenu(!openMenu)
-            }}>
-                {openMenu ? <AiOutlineClose className='text-yellow-950 w-10 h-10'/>
-                  : <GiHamburgerMenu className='text-yellow-950 w-10 h-10'/> 
+            <div className='xs:block mdl:hidden'>
+                {openMenu ? (<div 
+                                className='bg-yellow-400 absolute top-5 right-5
+                                flex flex-col z-50 py-5 px-5 text-yellow-950 shadow-bannerShadow'>
+                                  <button onClick={toogleMenu}>
+                                    <AiOutlineClose className='text-yellow-950 w-10 h-10 relative ml-20'/>
+                                  </button>
+                                <nav className='flex flex-col gap-20 text-2xl font-semibold'>
+                                    <ul>
+                                      <li 
+                                      onClick={toogleMenu}
+                                      className='hover:text-white hover:scale-105 focus:text-white mt-5 duration-300'>
+                                        <Link href="/">
+                                          Home
+                                        </Link>
+                                      </li>
+                                      <li
+                                      onClick={toogleMenu}
+                                      className='hover:text-white hover:scale-105 focus:text-white mt-5  duration-300'>
+                                        <Link  href="/menu">
+                                          Menu
+                                        </Link>
+                                      </li>
+                                      <li 
+                                      onClick={toogleMenu}
+                                      className='hover:text-white hover:scale-105 focus:text-white mt-5 duration-300'>
+                                        <Link  href="/events">
+                                          Events
+                                        </Link>
+                                      </li>
+                                      <li 
+                                      onClick={toogleMenu}
+                                      className='hover:text-white hover:scale-105 focus:text-white mt-5 mb-5 duration-300'>
+                                          <Link href="/contacts">
+                                            Contacts
+                                          </Link>
+                                      </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            ) : (<button className='mt-1.5' onClick={toogleMenu}>
+                                    <GiHamburgerMenu className='text-yellow-950 w-10 h-10'/>
+                                </button>)
                   }
             </div>
           </div>
