@@ -4,7 +4,7 @@ const OnTheWayOrders = ({ orders }) => {
 
 
     function countOnTheWayStatus(data) {
-        const filteredData = data.filter(item => item.status === 0);
+        const filteredData = data.filter(item => item.status === 2);
         const count = filteredData.length;
         return count;
       }
