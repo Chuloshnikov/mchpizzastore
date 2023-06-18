@@ -8,6 +8,7 @@ import AllProducts from './dashboard/AllProducts';
 import axios from "axios";
 import Spinner from "../Spinner";
 import PopularProduct from './dashboard/PopularProduct';
+import SecondPopular from './dashboard/SecondPopular';
 
 const AdminDashboard = () => {
     const [orders, setOrders] = useState();
@@ -55,6 +56,7 @@ const AdminDashboard = () => {
         <div className='flex xs:flex-col mdl:flex-row gap-2'>
           {products ? <AllProducts products={products} /> : <Spinner/>}
           {orders ? <PopularProduct orders={orders} /> : <Spinner/>}
+          {orders ? <SecondPopular orders={orders} /> : <Spinner/>}
         </div>
       </div>
     </div>
