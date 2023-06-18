@@ -2,7 +2,7 @@ import React from 'react';
 
 const AllOrders = ({ orders }) => {
 
-    const orderLen = orders.length;
+    const orderLen = orders?.length;
         
 
   return (
