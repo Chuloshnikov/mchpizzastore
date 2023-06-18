@@ -33,7 +33,7 @@ const PopularProduct = ({ orders }) => {
       }
 
       const extractTitle = (input) => {
-        const title = input.replace("Title: ", "");
+        const title = input?.replace("Title: ", "");
         return title;
       };
 
