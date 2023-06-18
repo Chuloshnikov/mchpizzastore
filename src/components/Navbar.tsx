@@ -38,12 +38,12 @@ const Navbar = () => {
     <div className='w-full bg-yellow-400 text-yellow-950 px-4 py-4 sticky top-0 z-50'>
       <div className='max-w-container mx-auto flex justify-between items-center'>
           <div>
-          <a className='flex items-center gap-2' href='tel:+38012345678' >
+          <a className='flex items-center gap-2' href='tel:+380730452115' >
             <div className='rounded-full p-2 bg-white'>
               <SlCallEnd className='text-3xl text-red-500'/>
             </div>
             <div className='xs:hidden mdl:block'>
-              <p className='text-sm font-semibold'>012 345 678</p>
+              <p className='text-sm font-semibold'>8 073 045 21 15</p>
               <p className='text-lg font-semibold'>Order Now!</p>
             </div>
           </a>
