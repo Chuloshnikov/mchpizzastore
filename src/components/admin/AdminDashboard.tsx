@@ -7,6 +7,7 @@ import DoneOrders from './dashboard/DoneOrders';
 import AllProducts from './dashboard/AllProducts';
 import axios from "axios";
 import Spinner from "../Spinner";
+import PopularProduct from './dashboard/PopularProduct';
 
 const AdminDashboard = () => {
     const [orders, setOrders] = useState();
@@ -52,11 +53,8 @@ const AdminDashboard = () => {
           <h2 className='font-semibold text-lg mx-auto mb-2'>Products:</h2>
         </div>
         <div className='flex xs:flex-col mdl:flex-row gap-2'>
-          {orders ? <AllProducts products={products} /> : <Spinner/>}
-          {orders ? <NewOrders orders={orders} /> : <Spinner/>}
-          {orders ? <PreparingOrders orders={orders} /> : <Spinner/>}
-          {orders ? <OnTheWayOrders orders={orders} /> : <Spinner/>}
-          {orders ? <DoneOrders orders={orders} /> : <Spinner/>}
+          {products ? <AllProducts products={products} /> : <Spinner/>}
+          {orders ? <PopularProduct orders={orders} /> : <Spinner/>}
         </div>
       </div>
     </div>

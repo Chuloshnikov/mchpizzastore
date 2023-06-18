@@ -12,12 +12,12 @@ const BannerText = ({ title, description, btnText, className}:Props) => {
         <p className='text-sm font-bold leading-5'>
             {description}
         </p>
-        <button className='bg-red-500 text-sm
-        text-white font-semibold 
-        w-24 h-8 shadow-bannerShadow hover:scale-105 duration-300'
+        <a href="#products" className='bg-red-500 text-sm cursor-pointer
+        text-white font-semibold max-w-[87px] whitespace-nowrap
+        px-2 py-1 shadow-bannerShadow hover:scale-105 duration-300'
         >
         {btnText}
-        </button>
+        </a>
     </div>
   )
 }
