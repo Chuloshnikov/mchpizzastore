@@ -1,4 +1,4 @@
-import AdminEventsList from "@/components/AdminEventsList";
+import AdminEventsList from "@/components/admin/AdminEventsList";
 import { getSession, useSession } from 'next-auth/react';
 
 

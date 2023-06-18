@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminLayout from '@/components/AdminLayout'
+import AdminLayout from '@/components/admin/AdminLayout'
 import ProductForm from '@/components/ProductForm';
 import { getSession, useSession } from 'next-auth/react';
 

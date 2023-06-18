@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-import AdminLayout from '@/components/AdminLayout';
+import AdminLayout from './AdminLayout';
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';

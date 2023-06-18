@@ -1,4 +1,4 @@
-import AdminProductsList from "../../components/AdminProductsList";
+import AdminProductsList from "../../components/admin/AdminProductsList";
 import { getSession, useSession } from 'next-auth/react';
 
 
