@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSession, signIn } from "next-auth/react";
-import AdminLayout from '@/components/AdminLayout';
-import AdminDashboard from '@/components/AdminDashboard';
+import AdminLayout from '@/components/admin/AdminLayout';
+import AdminDashboard from '@/components/admin/AdminDashboard';
 
 const Admin = () => {
   const [username, setUserName] = useState<String>();

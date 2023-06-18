@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AdminLayout from '@/components/AdminLayout';
+import AdminLayout from '@/components/admin/AdminLayout';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getSession, useSession } from 'next-auth/react';

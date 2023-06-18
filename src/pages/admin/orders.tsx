@@ -1,4 +1,4 @@
-import AdminOrdersList from '@/components/AdminOrdersList';
+import AdminOrdersList from '@/components/admin/AdminOrdersList';
 import { getSession, useSession } from 'next-auth/react';
 
 

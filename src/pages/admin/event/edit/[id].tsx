@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AdminLayout from '@/components/AdminLayout';
+import AdminLayout from '@/components/admin/AdminLayout';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import EventForm from '../../../../components/EventForm';
