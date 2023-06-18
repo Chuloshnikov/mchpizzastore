@@ -9,6 +9,7 @@ import axios from "axios";
 import Spinner from "../Spinner";
 import PopularProduct from './dashboard/PopularProduct';
 import SecondPopular from './dashboard/SecondPopular';
+import ThirdPopular from './dashboard/ThirdPopular';
 
 const AdminDashboard = () => {
     const [orders, setOrders] = useState();
@@ -49,7 +50,7 @@ const AdminDashboard = () => {
           {orders ? <DoneOrders orders={orders} /> : <Spinner/>}
         </div>
       </div>
-      <div>
+      <div className='mx-auto'>
         <div className='text-center'>
           <h2 className='font-semibold text-lg mx-auto mb-2'>Products:</h2>
         </div>
@@ -57,6 +58,7 @@ const AdminDashboard = () => {
           {products ? <AllProducts products={products} /> : <Spinner/>}
           {orders ? <PopularProduct orders={orders} /> : <Spinner/>}
           {orders ? <SecondPopular orders={orders} /> : <Spinner/>}
+          {orders ? <ThirdPopular orders={orders} /> : <Spinner/>}
         </div>
       </div>
     </div>
