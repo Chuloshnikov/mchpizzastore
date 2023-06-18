@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AllOrders from './dashboard/AllOrders';
-import PandingOrders from './dashboard/PandingOrders';
+import PreparingOrders from './dashboard/PreparingOrders';
+import NewOrders from './dashboard/NewOrders';
 import axios from "axios";
 import Spinner from "../Spinner";
 
@@ -18,13 +19,17 @@ const AdminDashboard = () => {
 
   return (
     <div className='text-yellow-950'>
-      <div>
+      <div className='text-center'>
           <h1 className='font-bold text-2xl'>Admin dashboard</h1>
       </div>
       <div>
-        <div>
+        <div className='text-center'>
+          <h2 className='font-semibold text-lg mx-auto'>Orders</h2>
+        </div>
+        <div className='flex gap-2'>
           {orders ? <AllOrders orders={orders} /> : <Spinner/>}
-          {orders ? <PandingOrders orders={orders} /> : <Spinner/>}
+          {orders ? <NewOrders orders={orders} /> : <Spinner/>}
+          {orders ? <PreparingOrders orders={orders} /> : <Spinner/>}
         </div>
       </div>
     </div>
