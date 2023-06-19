@@ -4,9 +4,10 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getSession, useSession } from 'next-auth/react';
 
-const DeleteOrderPage = () => {
+
+const DeleteWinePage = () => {
     const router = useRouter();
-    const [orderInfo, setOrderInfo] = useState();
+    const [wineInfo, setWineInfo] = useState();
     const { data: session } = useSession();
 
     const {id} = router.query;
@@ -15,17 +16,17 @@ const DeleteOrderPage = () => {
         if(!id) {
             return;
         }
-        axios.get(`/api/orderdata?id=${id}`).then(response => {
-            setOrderInfo(response.data);
+        axios.get(`/api/winedata?id=${id}`).then(response => {
+            setWineInfo(response.data);
         });
     }, [id]);
 
     const goBack = () => {
-        router.push('/admin/orders');
+        router.push('/admin/wine');
     }
 
-    const deleteOrder = async () => {
-      await axios.delete(`/api/orderdata?id=${id}`);
+    const deleteWine = async () => {
+      await axios.delete(`/api/winedata?id=${id}`);
         goBack();
     }
 
@@ -33,13 +34,13 @@ const DeleteOrderPage = () => {
     <AdminLayout>
         <div className='mb-[8%] mt-[8%]'>
             <h1 className='text-center text-2xl text-yellow-950 font-semibold mb-8'>
-                Do you really want to delete order &nbsp;&quot;{orderInfo?._id}&quot;?
+                Do you really want to delete wine &nbsp;&quot;{wineInfo?.title}&quot;?
             </h1>
             <div className='flex gap-1 justify-center'>
                 <button 
                     className='bg-red-500 text-white p-1 px-4 text-base font-semibold
                     hover:bg-red-600 duration-300'
-                    onClick={deleteOrder}
+                    onClick={deleteWine}
                     >
                     Yes
                 </button>
@@ -73,4 +74,4 @@ export async function getServerSideProps({ req }) {
     } 
   }
 
-export default DeleteOrderPage;
+export default DeleteWinePage;
