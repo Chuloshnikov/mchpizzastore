@@ -83,7 +83,7 @@ const ProductDetails = () => {
 
   return (
     <div className='w-full bg-white text-gray-800 px-4'>
-        <div className='max-w-contentContainer mx-auto flex items-center py-4 xs:flex-col lg:flex-row'>
+        <div className='max-w-contentContainer mx-auto flex items-center py-4 xs:flex-col lg:flex-row mb-12'>
             <div className='w-2/3 h-full xs:w-full flex items-center justify-center overflow-hidden relative'>
                 <img src={product.img} width={700} height={500} alt="pizza"/>
             </div>
