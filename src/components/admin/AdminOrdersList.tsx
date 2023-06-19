@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { BsFillTrashFill, BsPencilSquare } from "react-icons/bs";
 import Spinner from '../Spinner';
+import OrderStatus from './OrderStatus';
 
 const AdminOrdersList = () => {
     const [orders, setOrders] = useState();
@@ -52,6 +53,7 @@ const AdminOrdersList = () => {
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
+                                <TableCell className='font-semibold'>State</TableCell>
                                 <TableCell className='font-semibold'>Order ID</TableCell>
                                 <TableCell className='font-semibold'>Ordered</TableCell>
                                 <TableCell className='font-semibold'>Last changed</TableCell>
@@ -70,6 +72,9 @@ const AdminOrdersList = () => {
                                     key={order?._id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
+                                <TableCell component="th" scope="row">
+                                    <OrderStatus status={order?.status}/>
+                                </TableCell>
                                 <TableCell component="th" scope="row">
                                 {order?._id}
                                 </TableCell>
