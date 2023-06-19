@@ -18,7 +18,7 @@ const Admin = () => {
     
   if (!session) {
     return (
-      <div className='flex h-[500px] items-center'>
+      <div className='flex xs:h-[300px]  mdl:h-[600px] items-center'>
       <div className='flex flex-col items-center text-center w-full'>
           <div className='border p-5 shadow-containerShadow'>
               <h2 className='text-yellow-950 text-bold text-2xl mb-2'>Admin Panel</h2>
