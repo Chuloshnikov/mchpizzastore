@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Item } from "../../type";
 import PizzaCard from './PizzaCard';
 import { Product } from '../../type';
@@ -8,7 +8,6 @@ interface Props {
 }
 
 const PizzaList = ({ productData }: any) => {
-  
   return (
     <div id="products" className='max-w-contentContainer mx-auto mt-6 mb-6'>
       <div className='text-center'>

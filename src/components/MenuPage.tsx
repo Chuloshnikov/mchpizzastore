@@ -9,13 +9,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Spinner from "../components/Spinner";
 
 const MenuPage = () => {
     const [products, setProducts] = useState();
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
+        setLoading(true);
         axios.get("/api/productdata").then(response => {
             setProducts(response.data);
+            setLoading(false);
         });
         
     },  []);
@@ -46,7 +49,7 @@ const MenuPage = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {products?.map(product => (
+                                {!loading ? products?.map(product => (
                                     <TableRow
                                         key={product?._id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -72,7 +75,9 @@ const MenuPage = () => {
                                     </Link>
                                     </TableCell>
                                 </TableRow>
-                                ))}
+                                )) : (<div className='flex items-center justify-center mx-auto'>
+                                        <Spinner/>
+                                    </div>)}
                             </TableBody>
                         </Table>
                     </TableContainer>

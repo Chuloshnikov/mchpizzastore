@@ -11,12 +11,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { BsFillTrashFill, BsPencilSquare } from "react-icons/bs";
+import Spinner from '../Spinner';
 
 const AdminEventsList = () => {
     const [events, setEvents] = useState();
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
+        setLoading(true);
         axios.get("/api/eventdata").then(response => {
             setEvents(response.data);
+            setLoading(false);
         });
         
     },  []);
@@ -52,7 +56,7 @@ const AdminEventsList = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {events?.map(event => (
+                            {!loading ? events?.map(event => (
                                 <TableRow
                                     key={event?._id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -82,7 +86,11 @@ const AdminEventsList = () => {
                                     </Link>
                                 </TableCell>
                             </TableRow>
-                            ))}
+                            )) : (
+                                <div className='flex items-center justify-center mx-auto'>
+                                    <Spinner/>
+                                </div>)
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>

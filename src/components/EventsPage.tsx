@@ -1,12 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import Image from 'next/image';
 import axios from "axios";
+import Spinner from './Spinner';
 
 const EventsPage = () => {
     const [events, setEvents] = useState();
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
+        setLoading(true);
         axios.get("/api/eventdata").then(response => {
             setEvents(response.data);
+            setLoading(false);
         });
         
     },  []);
@@ -14,7 +18,7 @@ const EventsPage = () => {
   return (
     <div>
         <div>
-            {events?.map(event => (
+            {!loading ? events?.map(event => (
                 <div key={event._id} className='mx-auto mt-10 mb-12 shadow-bannerShadow p-10'>
                 <div>
                     <Image 
@@ -38,7 +42,10 @@ const EventsPage = () => {
                     </p>
                 </div>
             </div>
-            ))}
+            )) : (<div className='flex items-center justify-center mx-auto'>
+                        <Spinner/>
+                    </div>)
+                }
         </div>
     </div>
   )
