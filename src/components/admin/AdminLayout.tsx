@@ -5,6 +5,7 @@ import { MdDashboard }from "react-icons/md";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
 import { BsFillBalloonFill } from "react-icons/bs";
+import { MdWineBar } from "react-icons/md";
 
 const AdminLayout = ({ children } :any ) => {
   return (
@@ -23,6 +24,11 @@ const AdminLayout = ({ children } :any ) => {
                         </Link>
                     </li>
                     <li>
+                        <Link href="/admin/wine">
+                            <MdWineBar className='hover:text-white w-5 h-5 duration-200'/>
+                        </Link>
+                    </li>
+                    <li>
                         <Link href="/admin/orders">
                             <AiOutlineUnorderedList className='hover:text-white duration-200'/>
                         </Link>
@@ -38,7 +44,7 @@ const AdminLayout = ({ children } :any ) => {
                 </ul>
             </nav>
         </div>
-        <div className='bg-white flex-grow p-4'>
+        <div className='bg-white flex-grow p-4 mb-12'>
                 {children}
         </div>
     </div>
