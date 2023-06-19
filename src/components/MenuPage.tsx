@@ -13,11 +13,21 @@ import Spinner from "../components/Spinner";
 
 const MenuPage = () => {
     const [products, setProducts] = useState();
+    const [wineInfo, setWineInfo] = useState();
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true);
         axios.get("/api/productdata").then(response => {
             setProducts(response.data);
+            setLoading(false);
+        });
+        
+    },  []);
+
+    useEffect(() => {
+        setLoading(true);
+        axios.get("/api/winedata").then(response => {
+            setWineInfo(response.data);
             setLoading(false);
         });
         
@@ -96,139 +106,32 @@ const MenuPage = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                    <TableRow
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
-                                    <TableCell component="th" scope="row">
-                                    Riesling
-                                    </TableCell>
-                                    <TableCell  component="th" scope="row">
-                                    (Germany)
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $19.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $27.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $40.00
-                                    </TableCell>
-                                </TableRow>
+                                {!loading ? (wineInfo?.map(wine => (
                                 <TableRow
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
+                                    key={wine._id}
+                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                     >
                                     <TableCell component="th" scope="row">
-                                    Chardonnay
+                                    {wine?.title}
                                     </TableCell>
                                     <TableCell  component="th" scope="row">
-                                    (France)
+                                    {wine?.origin}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                    $18.00
+                                    ${parseFloat(wine?.prices[0]).toFixed(2)}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                    $25.00
+                                    ${parseFloat(wine?.prices[1]).toFixed(2)}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                    $35.00
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
-                                    <TableCell component="th" scope="row">
-                                    Merlot
-                                    </TableCell>
-                                    <TableCell  component="th" scope="row">
-                                    (Italy)
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $18.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $25.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $35.00
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
-                                    <TableCell component="th" scope="row">
-                                    Cabernet Sauvignon
-                                    </TableCell>
-                                    <TableCell  component="th" scope="row">
-                                    (United States)
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $21.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $35.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $45.00
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
-                                    <TableCell component="th" scope="row">
-                                    Pinot Noir
-                                    </TableCell>
-                                    <TableCell  component="th" scope="row">
-                                    (New Zealand)
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $20.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $33.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $43.00
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
-                                    <TableCell component="th" scope="row">
-                                    Sauvignon Blanc
-                                    </TableCell>
-                                    <TableCell  component="th" scope="row">
-                                    (Chile)
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $19.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $30.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $40.00
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
-                                    <TableCell component="th" scope="row">
-                                    Syrah
-                                    </TableCell>
-                                    <TableCell  component="th" scope="row">
-                                    (Australia)
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $17.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $25.00
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                    $34.00
-                                    </TableCell>
-                                </TableRow>
+                                    ${parseFloat(wine?.prices[2]).toFixed(2)}
+                                 </TableCell>
+                             </TableRow>
+                                ))) : (
+                                <div className='flex items-center justify-center mx-auto'>
+                                    <Spinner/>
+                                </div>) 
+                                }
                             </TableBody>
                         </Table>
                     </TableContainer>
