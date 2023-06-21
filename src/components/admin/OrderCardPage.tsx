@@ -71,7 +71,7 @@ const OrderCardPage = ({ id }) => {
       <div className='shadow-containerShadow p-5'>
         <div className='flex flex-col gap-2'>
           <h1 className='text-2xl font-bold'>MCH Pizza</h1>
-          <p className='text-base font-semibold'>Order № '{orderDetails?._id}'</p>
+          <p className='text-base font-semibold'>Order № &apos;{orderDetails?._id}&apos;</p>
         </div>
         <div>
           <TableContainer className='max-w-[1200px] mx-auto' component={Paper}>
