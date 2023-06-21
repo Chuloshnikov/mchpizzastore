@@ -19,7 +19,8 @@ const AdminEventsList = () => {
     useEffect(() => {
         setLoading(true);
         axios.get("/api/eventdata").then(response => {
-            setEvents(response.data);
+            const events = response.data.reverse();
+            setEvents(events);
             setLoading(false);
         });
         
