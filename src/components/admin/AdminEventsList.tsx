@@ -14,7 +14,7 @@ import { BsFillTrashFill, BsPencilSquare } from "react-icons/bs";
 import Spinner from '../Spinner';
 
 const AdminEventsList = () => {
-    const [events, setEvents] = useState();
+    const [events, setEvents] = useState(null);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true);

@@ -14,7 +14,7 @@ import Spinner from '../Spinner';
 import OrderStatus from './OrderStatus';
 
 const AdminOrdersList = () => {
-    const [orders, setOrders] = useState();
+    const [orders, setOrders] = useState(null);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true);

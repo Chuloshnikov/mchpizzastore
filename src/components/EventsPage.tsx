@@ -4,7 +4,7 @@ import axios from "axios";
 import Spinner from './Spinner';
 
 const EventsPage = () => {
-    const [events, setEvents] = useState();
+    const [events, setEvents] = useState(null);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true);
