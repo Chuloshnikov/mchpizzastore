@@ -16,7 +16,7 @@ interface Props {
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ productData }: Props) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -28,23 +28,11 @@ export default function Home({ productData }: Props) {
       <main>
           <div className='max-w-container mx-auto'>
             <Banner/>
-            <PizzaList productData={productData}/>
+            <PizzaList/>
           </div>
       </main>
     </>
   )
 }
 
-//------------------------------ DATA FETCHING--------------------------------------//
 
-export const getStaticProps = async () => {
-  
-  
-  const res = await axios.get("http://localhost:3000/api/productdata");
-  return {
-    props: {
-      productData: res.data,
-      revalidate: 60,
-    }
-  }
-}
