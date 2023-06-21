@@ -19,7 +19,8 @@ const AdminOrdersList = () => {
     useEffect(() => {
         setLoading(true);
         axios.get("/api/orderdata").then(response => {
-            setOrders(response.data);
+            const orders = response.data.reverse();
+            setOrders(orders);
             setLoading(false);
         });
         
