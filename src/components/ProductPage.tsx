@@ -138,14 +138,16 @@ const ProductPage = ({id}) => {
                 </div>
                 <h3 className='font-bold text-lg'>Add to cart</h3>
                 <div className='flex gap-2'>
-                    <input 
-                    onChange={(e) => setQuantiny(e.target.value)}
-                    defaultValue={1} 
-                    className='bg-teal-50 border border-teal-600 text-green-900
-                     dark:text-teal-400 placeholder-teal-700 dark:placeholder-teal-500 
-                     text-sm focus:ring-teal-500 focus:border-teal-500 block w-2/6 p-2.5
-                      dark:bg-gray-700 dark:border-teal-500' 
-                      type="number" />
+                <input
+                  onChange={(e) => setQuantiny(Math.max(parseInt(e.target.value), 1))}
+                  defaultValue={1}
+                  className='bg-teal-50 border border-teal-600 text-green-900
+                  dark:text-teal-400 placeholder-teal-700 dark:placeholder-teal-500 
+                  text-sm focus:ring-teal-500 focus:border-teal-500 block w-2/6 p-2.5
+                  dark:bg-gray-700 dark:border-teal-500'
+                  type="number"
+                  min="1" // Заборона вказання від'ємних значень
+                />
                     <button className='bg-red-600 text-sm p-2.5 text-white font-semibold
                      hover:bg-red-800 duration-300 mb-2'
                      onClick={handleClick}
