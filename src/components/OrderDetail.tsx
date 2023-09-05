@@ -13,7 +13,7 @@ const OrderDetail = ({ total, cartDetails, createOrder }) => {
   return (
     <div className='w-[100%] h-[80vh] absolute top-0 left-0 flex items-center justify-center bg-white'>
         <div className='max-w-[500px] text-white bg-[#4C4C4C] rounded-md p-8 mx-2 mt-40'>
-            <h1 className='text-3xl font-bold'>You will pay $12 after delivery</h1>
+            <h1 className='text-3xl font-bold'>You will pay ${total} after delivery</h1>
             <div className='flex flex-col mt-2'>
                 <label className='text-white'>Name Surename:</label>
                 <input 
